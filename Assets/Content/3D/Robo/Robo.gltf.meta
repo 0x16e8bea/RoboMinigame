@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: 915cb8708e37e804ebd2cfbdcebd1a7b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+  assetDependencies:
+  - type: 0
+    originalUri: Assets\Content\3D\Robo\Robo.bin
+    assetPath: Assets\Content\3D\Robo\Robo.bin
+  - type: 1
+    originalUri: Assets\Content\3D\Robo\T_RoboEmissive.png
+    assetPath: Assets\Content\3D\Robo\T_RoboEmissive.png
+  - type: 1
+    originalUri: Assets\Content\3D\Robo\T_RoboDiffuseBake.png
+    assetPath: Assets\Content\3D\Robo\T_RoboDiffuseBake.png
+  - type: 1
+    originalUri: Assets\Content\3D\Robo\T_Robo_Metallic-T_Robo_Roughtness.png
+    assetPath: Assets\Content\3D\Robo\T_Robo_Metallic-T_Robo_Roughtness.png
+  reportItems: []
