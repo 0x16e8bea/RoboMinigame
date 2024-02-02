@@ -1,36 +1,64 @@
-public class RobotController : IRobotController, IUpdate, IFixedUpdate
+using UnityEngine;
+
+namespace Content.Code.Gameplay.Robot
 {
-    public bool CanUpdate => true;
-    public bool CanFixedUpdate => true;
-
-    private readonly RobotControllerSettings _settings;
-
-    public RobotController(
-        RobotControllerSettings settings,
-        IMonoHookManager monoHookManager)
+    public class RobotController : IRobotController, IUpdate, IFixedUpdate
     {
-        _settings = settings;
-        monoHookManager.AddUpdateListener(this);
-    }
+        public bool CanUpdate => true;
+        public bool CanFixedUpdate => true;
+    
+        private int _currentLane;
 
-    public void Shoot()
-    {
-        throw new System.NotImplementedException();
-    }
+        private readonly GameObject _robotInstance;
+        private readonly ILaneManager _laneManager;
+        private readonly IRobotFactory _robotFactory;
 
-    public void Jump()
-    {
-        throw new System.NotImplementedException();
-    }
-
-
-    public void Update()
-    {
+        public RobotController(
+            GameObject robotInstance,
+            IMonoHookManager monoHookManager,
+            ILaneManager laneManager)
+        {
+            _robotInstance = robotInstance;
+            _laneManager = laneManager;
+            monoHookManager.AddUpdateListener(this);
+        }
         
-    }
 
-    public void FixedUpdate()
-    {
+        public void MoveToLaneInstantly(int laneIndex)
+        {
+            _currentLane = laneIndex;
+            _robotInstance.transform.position = _laneManager.GetLane(_currentLane).position;
+        }
+
+        public void Shoot()
+        {
+            
+        }
+
+        public void Jump()
+        {
+            
+        }
+
+        public void Move(IRobotController.MovementDirection direction)
+        {
+            var nextLane = _currentLane + (direction == IRobotController.MovementDirection.Left ? -1 : 1);
+            
+            if (nextLane < 0 || nextLane >= _laneManager.LaneCount)
+            {
+                return;
+            }
+        }
+
+
+        public void Update()
+        {
         
+        }
+
+        public void FixedUpdate()
+        {
+        
+        }
     }
 }

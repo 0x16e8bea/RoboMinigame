@@ -9,23 +9,16 @@ namespace Content.Code.DI
         protected ServiceCollection ServiceCollection;
         protected IServiceProvider ServiceProvider;
         private bool IsBootstrapped { get; set; }
-
-        #region Serialized fields
-
-        [SerializeField] private GameObject robotPrefab;
-
-        #endregion
-
+        
         private void Awake()
         {
-            Initialize();
+            Setup();
         }
 
-        public void Initialize()
+        protected virtual void Setup()
         {
             if (IsBootstrapped) throw new InvalidOperationException("Bootstrapper has already been initialized.");
-
-
+            
             ServiceCollection = new ServiceCollection();
             RegisterServices();
             ServiceProvider = ServiceCollection.BuildServiceProvider();
@@ -36,14 +29,12 @@ namespace Content.Code.DI
 
         protected virtual void RegisterServices()
         {
-            RegisterCharacter();
             RegisterEngineFeatures();
         }
 
         protected virtual void InitializeServices()
         {
             CreateAndInitializeMonoHook();
-            ServiceProvider.GetRequiredService<IRobotController>();
         }
 
         private void RegisterEngineFeatures()
@@ -51,11 +42,6 @@ namespace Content.Code.DI
             ServiceCollection.AddSingleton<IMonoHookManager, MonoHookManager>();
         }
 
-        private void RegisterCharacter()
-        {
-            ServiceCollection.AddSingleton<IRobotController, RobotController>();
-            ServiceCollection.AddSingleton(new RobotControllerSettings(robotPrefab));
-        }
 
         private void CreateAndInitializeMonoHook()
         {

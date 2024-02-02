@@ -1,4 +1,4 @@
 using UnityEngine;
 
-public record RobotControllerSettings(
+public record RobotFactorySettings(
     GameObject RobotPrefab);
