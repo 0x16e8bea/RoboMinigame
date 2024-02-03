@@ -10,7 +10,9 @@ namespace Content.Code.Gameplay.Level
 
         public LevelLifeCycle(
             IRobotFactory robotFactory,
-            ILaneManager laneManager)
+            ILaneManager laneManager,
+            IGamepadController gamepadController,
+            IGamepadStateMachine gamepadStateMachine)
         {
             _robotFactory = robotFactory;
             _laneManager = laneManager;

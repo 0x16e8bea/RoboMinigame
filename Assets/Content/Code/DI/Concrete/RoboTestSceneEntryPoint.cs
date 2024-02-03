@@ -11,6 +11,7 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
     #region Serialized fields
 
     [SerializeField] private GameObject robotPrefab;
+    [SerializeField] private GameObject gamepadPrefab;
     [SerializeField] private LaneSetup laneSetup;
     [SerializeField] private RobotSettings robotSettings;
 
@@ -35,6 +36,7 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
         base.RegisterServices();
         RegisterCharacter();
         RegisterLevel();
+        RegisterGamepad();
     }
 
     private void RegisterLevel()
@@ -56,6 +58,13 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
         ServiceCollection.AddSingleton(new RobotFactorySettings(robotPrefab));
         ServiceCollection.AddSingleton(_playerInputActions);
         ServiceCollection.AddSingleton(robotSettings);
+    }
+    
+    private void RegisterGamepad()
+    {
+        ServiceCollection.AddSingleton<IGamepadController, GamepadController>();
+        ServiceCollection.AddSingleton(new GamepadControllerSettings(gamepadPrefab)); 
+        ServiceCollection.AddSingleton<IGamepadStateMachine, GamepadStateMachine>();
     }
     
     
