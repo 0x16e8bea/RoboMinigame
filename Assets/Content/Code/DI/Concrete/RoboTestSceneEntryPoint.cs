@@ -12,6 +12,7 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
 
     [SerializeField] private GameObject robotPrefab;
     [SerializeField] private LaneSetup laneSetup;
+    [SerializeField] private RobotSettings robotSettings;
 
     #endregion
     
@@ -54,6 +55,7 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
         ServiceCollection.AddSingleton<IRobotFactory, RobotFactory>();
         ServiceCollection.AddSingleton(new RobotFactorySettings(robotPrefab));
         ServiceCollection.AddSingleton(_playerInputActions);
+        ServiceCollection.AddSingleton(robotSettings);
     }
     
     

@@ -16,19 +16,19 @@ public class LaneManager : ILaneManager
     public int StartLaneIndex => _laneSetup.StartLane;
     public int LaneCount => _laneSetup.Lanes.Length;
 
-    public Transform GetLane(int laneIndex)
+    public Vector3 GetLanePos(int laneIndex)
     {
-        return lanes[laneIndex];
+        return lanes[laneIndex].position + Vector3.forward * _laneSetup.CharacterLaneOffset;
     }
     
-    public Transform GetNextLane(int laneIndex)
+    public Vector3 GetNextLanePos(int laneIndex)
     {
-        return lanes[laneIndex + 1];
+        return lanes[laneIndex + 1].position + Vector3.forward * _laneSetup.CharacterLaneOffset;
     }
     
-    public Transform GetPreviousLane(int laneIndex)
+    public Vector3 GetPreviousLanePos(int laneIndex)
     {
-        return lanes[laneIndex - 1];
+        return lanes[laneIndex - 1].position + Vector3.forward * _laneSetup.CharacterLaneOffset;
     }
     
 }

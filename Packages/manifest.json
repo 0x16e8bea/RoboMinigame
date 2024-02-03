@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.inspiaaa.unityhfsm": "https://github.com/Inspiaaa/UnityHFSM.git#upm",
     "com.unity.cloud.gltfast": "6.2.0",

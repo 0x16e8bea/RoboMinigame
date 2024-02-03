@@ -2,9 +2,9 @@ using UnityEngine;
 
 public interface ILaneManager
 {
-    Transform GetLane(int laneIndex);
-    Transform GetNextLane(int laneIndex);
-    Transform GetPreviousLane(int laneIndex);
+    Vector3 GetLanePos(int laneIndex);
+    Vector3 GetNextLanePos(int laneIndex);
+    Vector3 GetPreviousLanePos(int laneIndex);
     ILaneSetup LaneSetup { get; }
     int StartLaneIndex { get; }
     int LaneCount { get; }

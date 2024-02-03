@@ -14,32 +14,37 @@ public class LaneSetup : MonoBehaviour, ILaneSetup
 
     #endregion
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
+        if (UnityEditor.Selection.activeGameObject != gameObject)
+            return;
+        
         // Draw a line for each of the lanes
         for (int i = 0; i < lanes.Length; i++)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(lanes[i].position, lanes[i].position + Vector3.forward * 10);
             // Write the lane number
-            DrawString(i.ToString(), lanes[i].position + Vector3.up * 0.5f);
+            DrawString(i.ToString(), lanes[i].position + Vector3.up * 0.5f, Color.white, new Vector2(0.5f, 0.5f));
         }
-        
+
         if (startLane >= lanes.Length || startLane < 0)
         {
-            DrawString("Start lane out of range", lanes[0].position + Vector3.up * 1.5f, Color.red);
+            DrawString("Start lane out of range", lanes[0].position + Vector3.up * 1.5f, Color.yellow, new Vector2(0.5f, 0.5f));
             return;
         }
-        
+
         // Draw the offset which runs perpendicular to the lanes
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(lanes[0].position + Vector3.forward * characterLaneOffset, lanes[lanes.Length - 1].position + Vector3.forward * characterLaneOffset);
+        Gizmos.DrawLine(lanes[0].position + Vector3.forward * characterLaneOffset,
+            lanes[lanes.Length - 1].position + Vector3.forward * characterLaneOffset);
 
         if (startLane < lanes.Length)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(lanes[startLane].position + Vector3.forward * characterLaneOffset, 0.5f);
-            
+            DrawString("Start lane " + startLane + " with offset " + characterLaneOffset, lanes[startLane].position + Vector3.forward * characterLaneOffset + Vector3.up * 1.5f, Color.green, new Vector2(0.5f, 0.5f));
         }
     }
     
@@ -49,13 +54,31 @@ public class LaneSetup : MonoBehaviour, ILaneSetup
     /// <param name="text"></param>
     /// <param name="worldPos"></param>
     /// <param name="colour"></param>
-    static void DrawString(string text, Vector3 worldPos, Color? colour = null) {
-        UnityEditor.Handles.BeginGUI();
-        if (colour.HasValue) GUI.color = colour.Value;
+    static public void DrawString(string text, Vector3 worldPosition, Color textColor, Vector2 anchor,
+        float textSize = 15f)
+    {
         var view = UnityEditor.SceneView.currentDrawingSceneView;
-        Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
-        Vector2 size = GUI.skin.label.CalcSize(new GUIContent(text));
-        GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), text);
+        if (!view)
+            return;
+        Vector3 screenPosition = view.camera.WorldToScreenPoint(worldPosition);
+        if (screenPosition.y < 0 || screenPosition.y > view.camera.pixelHeight || screenPosition.x < 0 ||
+            screenPosition.x > view.camera.pixelWidth || screenPosition.z < 0)
+            return;
+        var pixelRatio = UnityEditor.HandleUtility.GUIPointToScreenPixelCoordinate(Vector2.right).x -
+                         UnityEditor.HandleUtility.GUIPointToScreenPixelCoordinate(Vector2.zero).x;
+        UnityEditor.Handles.BeginGUI();
+        var style = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = (int)textSize,
+            normal = new GUIStyleState() { textColor = textColor }
+        };
+        Vector2 size = style.CalcSize(new GUIContent(text)) * pixelRatio;
+        var alignedPosition =
+            ((Vector2)screenPosition +
+             size * ((anchor + Vector2.left + Vector2.up) / 2f)) * (Vector2.right + Vector2.down) +
+            Vector2.up * view.camera.pixelHeight;
+        GUI.Label(new Rect(alignedPosition / pixelRatio, size / pixelRatio), text, style);
         UnityEditor.Handles.EndGUI();
+#endif
     }
 }
