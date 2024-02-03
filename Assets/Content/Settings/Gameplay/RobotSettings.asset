@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RobotSettings
   m_EditorClassIdentifier: 
   laneChangePeakHeight: 1
-  regularJumpHeight: 0.7
+  regularJumpHeight: 12
   laneChangeDuration: 0.3
   laneChangeAnimCurve:
     serializedVersion: 2
@@ -40,4 +40,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shootCooldown: 0.3
-  terminalVelocity: 10
+  terminalVelocity: 12

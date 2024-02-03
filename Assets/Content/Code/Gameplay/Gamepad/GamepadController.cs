@@ -25,16 +25,26 @@ public class GamepadController : IGamepadController
         _hinge2Rigidbody.AddForceAtPosition(Vector3.down * 25, _gamepadDefinition.DPad.position);
     }
 
-    public void MoveLeft()
+    public void PressLeftButton()
     {
         _animator.SetTrigger("Left");
     }
     
-    public void MoveRight()
+    public void PressRightButton()
     {
         _animator.SetTrigger("Right");
     }
-    
+
+    public void PressAButton()
+    {
+        _animator.SetTrigger("A");
+    }
+
+    public void PressBButton()
+    {
+        _animator.SetTrigger("B");
+    }
+
     public void ApplyForceToAButton()
     {
         _hinge1Rigidbody.AddForceAtPosition(Vector3.down * 25, _gamepadDefinition.JumpButton.position);

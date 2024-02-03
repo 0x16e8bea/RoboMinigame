@@ -135,7 +135,7 @@ namespace Content.Code.Gameplay.Robot
                 }
             }
 
-            _robotInstance.transform.position += _robotData.Velocity * Time.fixedDeltaTime;
+            _robotInstance.transform.position += _robotData.Velocity * Time.deltaTime;
         }
     }
 }
