@@ -9829,18 +9829,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
@@ -9876,6 +9891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9934,6 +9954,8 @@ MonoBehaviour:
   _health: 5
   _isGrounded: 1
   _canShoot: 1
+  _isChangingLanes: 0
+  _velocity: {x: 0, y: 0, z: 0}
 --- !u!4 &5692093824076171604 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
