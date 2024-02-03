@@ -18,17 +18,17 @@ public class LaneManager : ILaneManager
 
     public Vector3 GetLanePos(int laneIndex)
     {
-        return lanes[laneIndex].position + Vector3.forward * _laneSetup.CharacterLaneOffset;
+        return lanes[laneIndex].position + Vector3.forward * _laneSetup.PlayerSpawnOffset;
     }
     
     public Vector3 GetNextLanePos(int laneIndex)
     {
-        return lanes[laneIndex + 1].position + Vector3.forward * _laneSetup.CharacterLaneOffset;
+        return lanes[laneIndex + 1].position + Vector3.forward * _laneSetup.PlayerSpawnOffset;
     }
     
     public Vector3 GetPreviousLanePos(int laneIndex)
     {
-        return lanes[laneIndex - 1].position + Vector3.forward * _laneSetup.CharacterLaneOffset;
+        return lanes[laneIndex - 1].position + Vector3.forward * _laneSetup.PlayerSpawnOffset;
     }
     
 }

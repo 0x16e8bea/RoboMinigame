@@ -11,6 +11,8 @@ public class RobotStateMachine : IRobotStateMachine, PlayerInputActions.IDefault
         Idle,
         MovingLeft,
         MovingRight,
+        Shooting,
+        Jumping,
     }
 
     enum Triggers
@@ -18,7 +20,8 @@ public class RobotStateMachine : IRobotStateMachine, PlayerInputActions.IDefault
         Jump,
         Left,
         Right,
-        LaneChangeEnded
+        LaneChangeEnded,
+        Shoot,
     }
 
     private readonly IRobotController _robotController;
@@ -36,13 +39,47 @@ public class RobotStateMachine : IRobotStateMachine, PlayerInputActions.IDefault
         _fsm.AddState(RobotState.Idle);
         _fsm.AddState(RobotState.MovingLeft, state => OnEnterChangeLane(state, true).Forget());
         _fsm.AddState(RobotState.MovingRight, state => OnEnterChangeLane(state, false).Forget());
+        _fsm.AddState(RobotState.Shooting, OnEnterShoot);
+        _fsm.AddState(RobotState.Jumping, OnEnterJumpState);
         
-        _fsm.AddTriggerTransition(Triggers.Left, RobotState.Idle, RobotState.MovingLeft);
-        _fsm.AddTriggerTransition(Triggers.Right, RobotState.Idle, RobotState.MovingRight);
+        
+        _fsm.AddTriggerTransition(Triggers.Left, RobotState.Idle, RobotState.MovingLeft, _ => _robotController.Data.IsGrounded);
+        _fsm.AddTriggerTransition(Triggers.Right, RobotState.Idle, RobotState.MovingRight, _ => _robotController.Data.IsGrounded);
         _fsm.AddTriggerTransition(Triggers.LaneChangeEnded, RobotState.MovingLeft, RobotState.Idle);
         _fsm.AddTriggerTransition(Triggers.LaneChangeEnded, RobotState.MovingRight, RobotState.Idle);
+        _fsm.AddTriggerTransition(Triggers.Shoot, RobotState.Idle, RobotState.Shooting);
+        _fsm.AddTriggerTransition(Triggers.Jump, RobotState.Idle, RobotState.Jumping, _ => _robotController.Data.IsGrounded);
+
+    }
+
+    private void OnEnterJumpState(State<RobotState, Triggers> obj)
+    {
+        _robotController.Jump();
+        _fsm.RequestStateChange(RobotState.Idle);
+    }
+
+    private void OnEnterShoot(State<RobotState,Triggers> state)
+    {
+        if (_robotController.Data.CanShoot)
+        {
+            EnterShootCooldown().Forget();
+            _robotController.Shoot();
+        }
+        else
+        {
+            Debug.Log("Can't shoot yet");
+        }
+        
+        _fsm.RequestStateChange(RobotState.Idle);
     }
     
+    private async UniTask EnterShootCooldown()
+    {
+        _robotController.Data.CanShoot = false;
+        await UniTask.Delay(TimeSpan.FromSeconds(_robotController.Settings.ShootCooldown));
+        _robotController.Data.CanShoot = true;
+    }
+
     public void Start()
     {
         _fsm.Init();
@@ -50,17 +87,18 @@ public class RobotStateMachine : IRobotStateMachine, PlayerInputActions.IDefault
 
     private async UniTaskVoid OnEnterChangeLane(State<RobotState, Triggers> state, bool isMovingLeft)
     {
+        _robotController.Data.IsChangingLanes = true;
+        
         if (isMovingLeft)
         {
-            Debug.Log("Moving left");
             await _robotController.Move(IRobotController.MovementDirection.Left);
         }
         else
         {
-            Debug.Log("Moving right");
             await _robotController.Move(IRobotController.MovementDirection.Right);
         }
-
+        
+        _robotController.Data.IsChangingLanes = false;
         _fsm.Trigger(Triggers.LaneChangeEnded);
     }
     
@@ -84,10 +122,16 @@ public class RobotStateMachine : IRobotStateMachine, PlayerInputActions.IDefault
 
     public void OnShoot(InputAction.CallbackContext context)
     {
+        if (!context.started) return;
+        
+        _fsm.Trigger(Triggers.Shoot);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (!context.started) return;
+        
+        _fsm.Trigger(Triggers.Jump);
     }
 
     #endregion

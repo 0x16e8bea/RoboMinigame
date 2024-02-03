@@ -12,29 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ce0b592d0b48f185dd41178b54416b, type: 3}
   m_Name: RobotSettings
   m_EditorClassIdentifier: 
-  _jumpHeight: 1
-  _jumpDuration: 0.3
-  _jumpCurve:
+  laneChangePeakHeight: 1
+  regularJumpHeight: 0.7
+  laneChangeDuration: 0.3
+  laneChangeAnimCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1.1949562
-      outSlope: 1.1949562
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.10963455
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.5268615
-      outSlope: 0.5268615
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1860466
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shootCooldown: 0.3
+  terminalVelocity: 10

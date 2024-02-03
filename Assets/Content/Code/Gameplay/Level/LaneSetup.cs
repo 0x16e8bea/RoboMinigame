@@ -1,16 +1,19 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LaneSetup : MonoBehaviour, ILaneSetup
 {
     [SerializeField] private Transform[] lanes;
     [SerializeField] private int startLane;
-    [SerializeField] private float characterLaneOffset;
+    [SerializeField] private float playerSpawnOffset;
+    [SerializeField] private float enemySpawnOffset;
 
     #region Getters
 
     public Transform[] Lanes => lanes;
     public int StartLane => startLane;
-    public float CharacterLaneOffset => characterLaneOffset;
+    public float PlayerSpawnOffset => playerSpawnOffset;
+    public float EnemySpawnOffset => enemySpawnOffset;
 
     #endregion
 
@@ -37,15 +40,19 @@ public class LaneSetup : MonoBehaviour, ILaneSetup
 
         // Draw the offset which runs perpendicular to the lanes
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(lanes[0].position + Vector3.forward * characterLaneOffset,
-            lanes[lanes.Length - 1].position + Vector3.forward * characterLaneOffset);
+        Gizmos.DrawLine(lanes[0].position + Vector3.forward * playerSpawnOffset,
+            lanes[lanes.Length - 1].position + Vector3.forward * playerSpawnOffset);
 
         if (startLane < lanes.Length)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawSphere(lanes[startLane].position + Vector3.forward * characterLaneOffset, 0.5f);
-            DrawString("Start lane " + startLane + " with offset " + characterLaneOffset, lanes[startLane].position + Vector3.forward * characterLaneOffset + Vector3.up * 1.5f, Color.green, new Vector2(0.5f, 0.5f));
+            Gizmos.DrawSphere(lanes[startLane].position + Vector3.forward * playerSpawnOffset, 0.5f);
+            DrawString("Start lane " + startLane + " with offset " + playerSpawnOffset, lanes[startLane].position + Vector3.forward * playerSpawnOffset + Vector3.up * 1.5f, Color.green, new Vector2(0.5f, 0.5f));
         }
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(lanes[0].position + Vector3.forward * enemySpawnOffset,
+            lanes[lanes.Length - 1].position + Vector3.forward * enemySpawnOffset);
     }
     
     /// <summary>

@@ -4,5 +4,6 @@ public interface ILaneSetup
 {
     Transform[] Lanes { get; }
     int StartLane { get; }
-    float CharacterLaneOffset { get; }
+    float PlayerSpawnOffset { get; }
+    float EnemySpawnOffset { get; }
 }

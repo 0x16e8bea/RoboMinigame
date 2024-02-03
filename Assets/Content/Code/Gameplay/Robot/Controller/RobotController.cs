@@ -1,21 +1,25 @@
-using System;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Content.Code.Gameplay.Robot
 {
-    public class RobotController : IRobotController, IUpdate, IFixedUpdate
+    public class RobotController : IRobotController, IUpdate
     {
-        public bool CanUpdate => true;
-        public bool CanFixedUpdate => true;
-    
-        private int _currentLane;
+        private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
 
         private readonly GameObject _robotInstance;
         private readonly ILaneManager _laneManager;
         private readonly IRobotFactory _robotFactory;
         private readonly RobotSettings _robotSettings;
+        private readonly IRobotDefinition _robotDefinition;
+
+        private int _currentLane;
+        private IRobotData _robotData;
+
+        public bool CanUpdate => true;
+        public bool CanFixedUpdate => true;
+        public IRobotData Data => _robotData;
+        public RobotSettings Settings => _robotSettings;
 
         public RobotController(
             GameObject robotInstance,
@@ -26,9 +30,16 @@ namespace Content.Code.Gameplay.Robot
             _robotInstance = robotInstance;
             _laneManager = laneManager;
             _robotSettings = robotSettings;
+            _robotDefinition = _robotInstance.GetComponent<IRobotDefinition>();
             monoHookManager.AddUpdateListener(this);
+            _robotData = _robotInstance.GetComponent<IRobotData>();
         }
-        
+
+        public void Jump()
+        {
+            _robotData.Velocity = Vector3.up * Mathf.Sqrt(2 * _robotSettings.RegularJumpHeight * Physics.gravity.magnitude);
+            _robotData.IsGrounded = false;
+        }
 
         public void MoveToLaneInstantly(int laneIndex)
         {
@@ -41,13 +52,13 @@ namespace Content.Code.Gameplay.Robot
             Vector3 currentPos = _laneManager.GetLanePos(_currentLane);
             Vector3 targetPos = _laneManager.GetLanePos(laneIndex);
             Vector3 direction = targetPos - currentPos;
-            float jumpHeight = Mathf.Max(currentPos.y, targetPos.y) + _robotSettings.JumpHeight;
+            float jumpHeight = Mathf.Max(currentPos.y, targetPos.y) + _robotSettings.LaneChangePeakHeight;
             Vector3 peakPoint = (direction * 0.5f) + currentPos + Vector3.up * jumpHeight;
 
             SimpleQuadraticSolver.Coefficients coefficients = SimpleQuadraticSolver.Calc3PointIntersectionCoefficients(currentPos, peakPoint, targetPos);
 
             float totalDistance = direction.magnitude;
-            float speed = totalDistance / _robotSettings.JumpDuration;
+            float speed = totalDistance / _robotSettings.LaneChangeDuration;
             float accumulatedDistance = 0f;
 
             Vector3 startPos = currentPos;
@@ -58,7 +69,7 @@ namespace Content.Code.Gameplay.Robot
                 accumulatedDistance += distanceThisFrame;
 
                 // Calculate the current position based on the accumulated distance
-                float xPos = Mathf.Lerp(startPos.x, targetPos.x, _robotSettings.JumpCurve.Evaluate(accumulatedDistance / totalDistance));
+                float xPos = Mathf.Lerp(startPos.x, targetPos.x, _robotSettings.LaneChangeAnimCurve.Evaluate(accumulatedDistance / totalDistance));
                 float yPos = SimpleQuadraticSolver.CalculateY(xPos, coefficients);
                 
                 // Update the robot's position
@@ -66,19 +77,13 @@ namespace Content.Code.Gameplay.Robot
                 await UniTask.Yield(PlayerLoopTiming.Update);
             }
             
-
             return true;
         }
 
-
         public void Shoot()
         {
-            
-        }
-
-        public void Jump()
-        {
-            
+            _robotDefinition.BlastAnimator.SetTrigger(ShootTrigger);
+            _robotDefinition.BlastParticleSystem.Play();
         }
 
         public async UniTask<MovementResult> Move(IRobotController.MovementDirection direction)
@@ -96,15 +101,41 @@ namespace Content.Code.Gameplay.Robot
             return new MovementResult(isLaneChangeSuccessful);
         }
 
-
         public void Update()
         {
-        
-        }
+            if (_robotData.IsChangingLanes)
+            {
+                _robotData.Velocity = Vector3.zero;
+                return;
+            }
+            
+            _robotData.Velocity += Physics.gravity * Time.deltaTime;
+            _robotData.Velocity = Vector3.ClampMagnitude(_robotData.Velocity, _robotSettings.TerminalVelocity);
 
-        public void FixedUpdate()
-        {
-        
+            // If velocity is indicating that we are falling, do a raycast to check if we are grounded
+            if (_robotData.Velocity.y < 0)
+            {
+                if (Physics.Raycast(
+                        _robotInstance.transform.position + Vector3.up * 0.5f,
+                        Vector3.down,
+                        out var hit, Mathf.Infinity,
+                        LayerMask.GetMask("Ground")))
+                {
+                    var distanceToGround = _robotInstance.transform.position.y - hit.point.y;
+
+                    if (distanceToGround < 0.01f)
+                    {
+                        _robotData.IsGrounded = true;
+                        _robotData.Velocity = Vector3.zero;
+                    }
+                    else
+                    {
+                        _robotData.IsGrounded = false;
+                    }
+                }
+            }
+
+            _robotInstance.transform.position += _robotData.Velocity * Time.fixedDeltaTime;
         }
     }
 }
