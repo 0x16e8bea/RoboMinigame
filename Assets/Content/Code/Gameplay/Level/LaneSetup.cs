@@ -27,7 +27,7 @@ public class LaneSetup : MonoBehaviour, ILaneSetup
         for (int i = 0; i < lanes.Length; i++)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(lanes[i].position, lanes[i].position + Vector3.forward * 10);
+            Gizmos.DrawLine(lanes[i].position, lanes[i].position + Vector3.forward * 100);
             // Write the lane number
             DrawString(i.ToString(), lanes[i].position + Vector3.up * 0.5f, Color.white, new Vector2(0.5f, 0.5f));
         }
@@ -53,6 +53,8 @@ public class LaneSetup : MonoBehaviour, ILaneSetup
         Gizmos.color = Color.red;
         Gizmos.DrawLine(lanes[0].position + Vector3.forward * enemySpawnOffset,
             lanes[lanes.Length - 1].position + Vector3.forward * enemySpawnOffset);
+        
+        DrawString("Enemy spawn offset " + enemySpawnOffset, lanes[0].position + Vector3.forward * enemySpawnOffset + Vector3.up * 1.5f, Color.red, new Vector2(0.5f, 0.5f));
     }
     
     /// <summary>
