@@ -1,5 +1,7 @@
 using Content.Code.Gameplay.Level;
 using Content.Code.Gameplay.Robot.Controller;
+using Content.Code.Gameplay.Robot.Controller.Monobehaviour;
+using Content.Code.Gameplay.Robot.Projectiles;
 using Content.Code.Gameplay.Robot.StateMachine;
 using UnityEngine;
 
@@ -27,7 +29,7 @@ namespace Content.Code.Gameplay.Robot.Factory
             _robotSettings = robotSettings;
         }
 
-        public (IRobotController, IRobotStateMachine) InstantiateRobot(Vector3 position = default, Quaternion rotation = default)
+        public (IRobotController, IRobotStateMachine, IRobotDefinition) InstantiateRobot(Vector3 position = default, Quaternion rotation = default)
         {
             var instance = Object.Instantiate(_robotFactorySettings.RobotPrefab, position, rotation);
             IRobotController? robotController = new RobotController(instance, _monoHookManager, _laneManager, _robotSettings);
@@ -38,7 +40,7 @@ namespace Content.Code.Gameplay.Robot.Factory
                 throw new System.Exception("Robot prefab does not have a component implementing IRobotController");
             }
         
-            return (robotController, robotStateMachine);
+            return (robotController, robotStateMachine, instance.GetComponent<IRobotDefinition>());
         }
     }
 }

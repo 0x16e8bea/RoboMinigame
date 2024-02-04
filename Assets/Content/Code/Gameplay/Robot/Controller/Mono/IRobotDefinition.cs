@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Content.Code.Gameplay.Robot.Projectiles;
+using UnityEngine;
 
 namespace Content.Code.Gameplay.Robot.Controller.Monobehaviour
 {
@@ -6,5 +7,6 @@ namespace Content.Code.Gameplay.Robot.Controller.Monobehaviour
     {
         Animator BlastAnimator { get; }
         ParticleSystem BlastParticleSystem { get; }
+        IParticleCollisionNotifier ParticleCollisionNotifier { get; }
     }
 }

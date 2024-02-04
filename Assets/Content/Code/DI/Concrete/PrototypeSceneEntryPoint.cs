@@ -1,13 +1,16 @@
+using System;
+using System.Collections.Generic;
 using Content.Code.DI;
+using Content.Code.Gameplay.Enemies;
 using Content.Code.Gameplay.Gamepad;
 using Content.Code.Gameplay.Level;
-using Content.Code.Gameplay.Robot;
 using Content.Code.Gameplay.Robot.Controller;
 using Content.Code.Gameplay.Robot.Factory;
+using Content.Code.Gameplay.Robot.Projectiles;
 using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
 
-public class RoboTestSceneEntryPoint : ServicesBootstrapper
+public class PrototypeSceneEntryPoint : ServicesBootstrapper
 {
     ServicesBootstrapper _servicesBootstrapper;
     
@@ -17,6 +20,10 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
     [SerializeField] private GameObject gamepadPrefab;
     [SerializeField] private LaneSetup laneSetup;
     [SerializeField] private RobotSettings robotSettings;
+    
+    // TODO: Perhaps add a scriptable object containing all the enemy prefabs
+    [SerializeField] private GameObject enemy1Prefab;
+
 
     #endregion
     
@@ -40,6 +47,7 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
         RegisterCharacter();
         RegisterLevel();
         RegisterGamepad();
+        RegisterEnemy();
     }
 
     private void RegisterLevel()
@@ -52,7 +60,7 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
     protected override void InitializeServices()
     {
         base.InitializeServices();
-        ServiceProvider.GetRequiredService<ILevelLifeCycle>();
+        ServiceProvider.GetRequiredService<ILevelLifeCycle>().InitializeLevel();
     }
 
     private void RegisterCharacter()
@@ -68,6 +76,17 @@ public class RoboTestSceneEntryPoint : ServicesBootstrapper
         ServiceCollection.AddSingleton<IGamepadController, GamepadController>();
         ServiceCollection.AddSingleton(new GamepadControllerSettings(gamepadPrefab)); 
         ServiceCollection.AddSingleton<IGamepadStateMachine, GamepadStateMachine>();
+    }
+    
+    private void RegisterEnemy()
+    {
+        ServiceCollection.AddSingleton<IEnemyFactory, EnemyFactory>();
+        ServiceCollection.AddSingleton<IEnemySpawner, EnemySpawner>();
+        ServiceCollection.AddSingleton<IDictionary<Type, IEnemyRecipe>>(new Dictionary<Type, IEnemyRecipe>
+        {
+            {typeof(SimpleEnemyRecipe), new SimpleEnemyRecipe(enemy1Prefab)}
+        });
+        ServiceCollection.AddSingleton<IEnemyRepository, EnemyRepository>();
     }
     
     

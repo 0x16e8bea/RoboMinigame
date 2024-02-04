@@ -50,7 +50,7 @@ namespace Content.Code.Gameplay.Robot.StateMachine
             _fsm.AddTriggerTransition(Triggers.Right, RobotState.Idle, RobotState.MovingRight, _ => _robotController.Data.IsGrounded);
             _fsm.AddTriggerTransition(Triggers.LaneChangeEnded, RobotState.MovingLeft, RobotState.Idle);
             _fsm.AddTriggerTransition(Triggers.LaneChangeEnded, RobotState.MovingRight, RobotState.Idle);
-            _fsm.AddTriggerTransition(Triggers.Shoot, RobotState.Idle, RobotState.Shooting);
+            _fsm.AddTriggerTransition(Triggers.Shoot, RobotState.Idle, RobotState.Shooting, _ => _robotController.Data.IsGrounded);
             _fsm.AddTriggerTransition(Triggers.Jump, RobotState.Idle, RobotState.Jumping, _ => _robotController.Data.IsGrounded);
 
         }

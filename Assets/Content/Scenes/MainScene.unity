@@ -607,9 +607,9 @@ MonoBehaviour:
   - {fileID: 1194905855}
   - {fileID: 1369064931}
   - {fileID: 1076027893}
-  startLane: 0
+  startLane: 1
   playerSpawnOffset: 2.69
-  enemySpawnOffset: 0
+  enemySpawnOffset: 17.7
 --- !u!4 &850404918
 Transform:
   m_ObjectHideFlags: 0
@@ -786,6 +786,8 @@ MonoBehaviour:
   gamepadPrefab: {fileID: 721363058}
   laneSetup: {fileID: 850404917}
   robotSettings: {fileID: 11400000, guid: 2da6c265c54d95648bfde992efb2fc2c, type: 2}
+  enemy1Prefab: {fileID: 8937705605061878115, guid: 565c905fa61f19f41ac0ed9bf6c9388e,
+    type: 3}
 --- !u!4 &1652284325
 Transform:
   m_ObjectHideFlags: 0
