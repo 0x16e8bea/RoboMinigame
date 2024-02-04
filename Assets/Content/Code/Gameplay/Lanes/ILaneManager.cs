@@ -10,5 +10,6 @@ namespace Content.Code.Gameplay.Level
         ILaneSetup LaneSetup { get; }
         int StartLaneIndex { get; }
         int LaneCount { get; }
+        ILane GetLane(int laneIndex);
     }
 }

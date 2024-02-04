@@ -11,7 +11,6 @@ namespace Content.Code.Gameplay.Enemies
     public class SimpleEnemyController : IEnemyController
     {
         private readonly IEnemyDefinition _enemyDefinition;
-        public Action<IEnemyController> OnDeath { get; set; }
         public GameObject GameObject { get; }
 
         public SimpleEnemyController(GameObject gameObject)
@@ -29,10 +28,5 @@ namespace Content.Code.Gameplay.Enemies
         {
         }
 
-        public void Kill()
-        {
-            Object.Destroy(GameObject);
-            OnDeath?.Invoke(this);
-        }
     }
 }

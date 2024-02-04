@@ -6,7 +6,8 @@ namespace Content.Code.Gameplay.Enemies.Instance
 {
     public class EnemyInstance : IEnemyInstance
     {
-        public int InstanceId { get; }
+        public int InstanceId { get; } = -1;
+        public int LaneIndex { get; set; } = -1;
         public GameObject GameObject { get; }
         public IEnemyController Controller { get; }
         public IEnemyStateMachine StateMachine { get; }

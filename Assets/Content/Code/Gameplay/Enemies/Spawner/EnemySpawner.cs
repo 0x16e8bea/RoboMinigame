@@ -10,7 +10,6 @@ namespace Content.Code.Gameplay.Enemies
         private readonly ILaneManager _laneManager;
         private readonly IEnemyFactory _enemyFactory;
         private readonly IEnemyRepository _enemyRepository;
-        private bool[] _laneOccupied;
 
         public EnemySpawner(
             ILaneManager laneManager,
@@ -20,34 +19,39 @@ namespace Content.Code.Gameplay.Enemies
             _laneManager = laneManager;
             _enemyFactory = enemyFactory;
             _enemyRepository = enemyRepository;
-            _laneOccupied = new bool[_laneManager.LaneCount];
         }
     
-        public void SpawnEnemy<T>(int lane) where T : IEnemyRecipe
+        public void SpawnEnemy<T>(int laneIndex) where T : IEnemyRecipe
         {
-            // Check if lane is valid
-            if (lane < 0 || lane >= _laneManager.LaneCount)
+            var requestedLane = _laneManager.GetLane(laneIndex);
+            
+            if (requestedLane.IsEnemySpotOccupied)
             {
-                throw new System.ArgumentOutOfRangeException("lane", "Lane is out of range");
-            }
-        
-            // Check if lane is already occupied
-            if (_laneOccupied[lane])
-            {
-                Debug.LogError("Lane is already occupied");
+                Debug.LogError("Lane is occupied");
                 return;
+            }
+            
+            requestedLane.IsEnemySpotOccupied = true;
+
+            // Check if lane is valid
+            if (laneIndex < 0 || laneIndex >= _laneManager.LaneCount)
+            {
+                throw new System.ArgumentOutOfRangeException("laneIndex", "Lane is out of range");
             }
 
             // Spawn the enemy
-            IEnemyInstance controller = _enemyFactory.CreateEnemy<T>();
-            _enemyRepository.AddEnemy(controller);
+            IEnemyInstance instance = _enemyFactory.CreateEnemy<T>();
+            instance.LaneIndex = laneIndex;
+            
+            _laneManager.GetLane(laneIndex).IsEnemySpotOccupied = true;
+            
+            _enemyRepository.AddEnemy(instance);
         
             // Set the enemy's position
-            Vector3 position = _laneManager.GetLanePos(lane);
-            controller.GameObject.transform.position = position + _laneManager.LaneSetup.EnemySpawnOffset * Vector3.forward;
-            controller.GameObject.transform.rotation = Quaternion.LookRotation(Vector3.back, Vector3.up);
-        
-        
+            Vector3 position = _laneManager.GetLanePos(laneIndex);
+            instance.GameObject.transform.position = position + _laneManager.LaneSetup.EnemySpawnOffset * Vector3.forward;
+            instance.GameObject.transform.rotation = Quaternion.LookRotation(Vector3.back, Vector3.up);
+            
         }
     }
 }

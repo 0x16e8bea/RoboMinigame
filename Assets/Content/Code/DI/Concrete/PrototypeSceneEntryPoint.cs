@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Content.Code.DI;
 using Content.Code.Gameplay.Enemies;
+using Content.Code.Gameplay.Enemies.FX;
 using Content.Code.Gameplay.Gamepad;
 using Content.Code.Gameplay.Level;
 using Content.Code.Gameplay.Robot.Controller;
@@ -9,6 +10,7 @@ using Content.Code.Gameplay.Robot.Factory;
 using Content.Code.Gameplay.Robot.Projectiles;
 using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PrototypeSceneEntryPoint : ServicesBootstrapper
 {
@@ -20,7 +22,8 @@ public class PrototypeSceneEntryPoint : ServicesBootstrapper
     [SerializeField] private GameObject gamepadPrefab;
     [SerializeField] private LaneSetup laneSetup;
     [SerializeField] private RobotSettings robotSettings;
-    
+    [FormerlySerializedAs("enemyDeathParticleController")] [SerializeField] private EnemyDeathFXController enemyDeathFXController;
+
     // TODO: Perhaps add a scriptable object containing all the enemy prefabs
     [SerializeField] private GameObject enemy1Prefab;
 
@@ -87,6 +90,7 @@ public class PrototypeSceneEntryPoint : ServicesBootstrapper
             {typeof(SimpleEnemyRecipe), new SimpleEnemyRecipe(enemy1Prefab)}
         });
         ServiceCollection.AddSingleton<IEnemyRepository, EnemyRepository>();
+        ServiceCollection.AddSingleton<IEnemyDeathFXController>(enemyDeathFXController);
     }
     
     

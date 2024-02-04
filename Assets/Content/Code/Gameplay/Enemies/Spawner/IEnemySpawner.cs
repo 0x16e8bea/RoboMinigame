@@ -2,6 +2,6 @@
 {
     public interface IEnemySpawner
     {
-        void SpawnEnemy<T>(int lane) where T : IEnemyRecipe;
+        void SpawnEnemy<T>(int laneIndex) where T : IEnemyRecipe;
     }
 }
