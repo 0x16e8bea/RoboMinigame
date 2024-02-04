@@ -1,7 +1,9 @@
-﻿namespace Content.Code.Gameplay.Enemies
+﻿using Content.Code.Gameplay.Enemies.Instance;
+
+namespace Content.Code.Gameplay.Enemies
 {
     public interface IEnemySpawner
     {
-        void SpawnEnemy<T>(int laneIndex) where T : IEnemyRecipe;
+        IEnemyInstance? SpawnEnemy<T>(int laneIndex) where T : IEnemyRecipe;
     }
 }

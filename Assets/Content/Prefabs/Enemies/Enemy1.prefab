@@ -14855,6 +14855,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4240237375324356167}
   projectileParticleSystem: {fileID: 5805530228815270148}
   destroyedParticleSystem: {fileID: 4933629188376578457}
+  particleCollisionNotifier: {fileID: 143775558979072401}
 --- !u!65 &5217536820319947664
 BoxCollider:
   m_ObjectHideFlags: 0

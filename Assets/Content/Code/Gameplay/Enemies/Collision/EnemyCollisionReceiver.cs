@@ -5,14 +5,13 @@ using Content.Code.Gameplay.Level;
 using Content.Code.Gameplay.Robot.Projectiles;
 using UnityEngine;
 
-public class EnemyCollisionNotifier : IEnemyCollisionNotifier
+public class EnemyCollisionReceiver : ICollisionReceiver
 {
     private readonly IEnemyRepository _enemyRepository;
     private readonly ILaneManager _laneManager;
     private readonly IEnemyDeathFXController _enemyDeathFXController;
 
-    public EnemyCollisionNotifier(
-        IParticleCollisionNotifier particleCollisionNotifier,
+    public EnemyCollisionReceiver(
         IEnemyRepository enemyRepository,
         ILaneManager laneManager,
         IEnemyDeathFXController enemyDeathFXController)
@@ -20,7 +19,16 @@ public class EnemyCollisionNotifier : IEnemyCollisionNotifier
         _enemyRepository = enemyRepository;
         _laneManager = laneManager;
         _enemyDeathFXController = enemyDeathFXController;
+    }
+    
+    public void RegisterCollisions(IParticleCollisionNotifier particleCollisionNotifier)
+    {
         particleCollisionNotifier.AddListener(OnParticleCollision);
+    }
+    
+    public void UnregisterCollisions(IParticleCollisionNotifier particleCollisionNotifier)
+    {
+        particleCollisionNotifier.RemoveListener(OnParticleCollision);
     }
 
     private void OnParticleCollision(GameObject other)
@@ -36,4 +44,5 @@ public class EnemyCollisionNotifier : IEnemyCollisionNotifier
             _enemyDeathFXController.PlayDeathParticlesAtLocation(instance.GameObject.transform.position);
         }
     }
+    
 }

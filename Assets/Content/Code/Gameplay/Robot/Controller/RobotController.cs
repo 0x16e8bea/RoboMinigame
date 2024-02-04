@@ -1,3 +1,4 @@
+using Content.Code.Gameplay.Gamepad;
 using Content.Code.Gameplay.Level;
 using Content.Code.Gameplay.Robot.Controller.Monobehaviour;
 using Content.Code.Gameplay.Robot.Factory;
@@ -16,13 +17,13 @@ namespace Content.Code.Gameplay.Robot.Controller
         private readonly ILaneManager _laneManager;
         private readonly IRobotFactory _robotFactory;
         private readonly RobotSettings _robotSettings;
+        private readonly IHealthIndicatorController _healthIndicatorController;
         private readonly IRobotDefinition _robotDefinition;
 
         private int _currentLane;
         private IRobotData _robotData;
 
         public bool CanUpdate => true;
-        public bool CanFixedUpdate => true;
         public IRobotData Data => _robotData;
         public RobotSettings Settings => _robotSettings;
 
@@ -30,14 +31,17 @@ namespace Content.Code.Gameplay.Robot.Controller
             GameObject robotInstance,
             IMonoHookManager monoHookManager,
             ILaneManager laneManager,
-            RobotSettings robotSettings)
+            RobotSettings robotSettings,
+            IHealthIndicatorController healthIndicatorController)
         {
             _robotInstance = robotInstance;
             _laneManager = laneManager;
             _robotSettings = robotSettings;
+            _healthIndicatorController = healthIndicatorController;
             _robotDefinition = _robotInstance.GetComponent<IRobotDefinition>();
             monoHookManager.AddUpdateListener(this);
             _robotData = _robotInstance.GetComponent<IRobotData>();
+            healthIndicatorController.SetHealthIndicator(_robotData.Health);
         }
 
         public void Jump()
@@ -90,6 +94,19 @@ namespace Content.Code.Gameplay.Robot.Controller
             _robotDefinition.BlastAnimator.SetTrigger(ShootTrigger);
             _robotDefinition.BlastParticleSystem.Play();
         }
+
+        public void TakeDamage()
+        {
+            if (_robotData.Health <= 0)
+            {
+                Debug.Log("Robot is dead");
+                return;
+            }
+            
+            _robotData.Health--;
+            _healthIndicatorController.SetHealthIndicator(_robotData.Health);
+        }
+        
 
         public async UniTask<MovementResult> Move(IRobotController.MovementDirection direction)
         {

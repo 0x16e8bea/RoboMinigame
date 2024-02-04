@@ -11,11 +11,14 @@ namespace Content.Code.Gameplay.Robot.Controller
         void MoveToLaneInstantly(int laneIndex);
         UniTask<MovementResult> Move(MovementDirection direction);
         void Shoot();
+        void TakeDamage();
+
 
         enum MovementDirection
         {
             Left,
             Right,
         }
+
     }
 }

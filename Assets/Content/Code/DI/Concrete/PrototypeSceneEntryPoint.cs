@@ -22,9 +22,10 @@ public class PrototypeSceneEntryPoint : ServicesBootstrapper
     [SerializeField] private GameObject gamepadPrefab;
     [SerializeField] private LaneSetup laneSetup;
     [SerializeField] private RobotSettings robotSettings;
-    [FormerlySerializedAs("enemyDeathParticleController")] [SerializeField] private EnemyDeathFXController enemyDeathFXController;
+    [SerializeField] private EnemyDeathFXController enemyDeathFXController;
+    [SerializeField] private HealthIndicatorController healthIndicatorController;
+    
 
-    // TODO: Perhaps add a scriptable object containing all the enemy prefabs
     [SerializeField] private GameObject enemy1Prefab;
 
 
@@ -79,6 +80,7 @@ public class PrototypeSceneEntryPoint : ServicesBootstrapper
         ServiceCollection.AddSingleton<IGamepadController, GamepadController>();
         ServiceCollection.AddSingleton(new GamepadControllerSettings(gamepadPrefab)); 
         ServiceCollection.AddSingleton<IGamepadStateMachine, GamepadStateMachine>();
+        ServiceCollection.AddSingleton<IHealthIndicatorController>(healthIndicatorController);
     }
     
     private void RegisterEnemy()
@@ -91,6 +93,7 @@ public class PrototypeSceneEntryPoint : ServicesBootstrapper
         });
         ServiceCollection.AddSingleton<IEnemyRepository, EnemyRepository>();
         ServiceCollection.AddSingleton<IEnemyDeathFXController>(enemyDeathFXController);
+        ServiceCollection.AddSingleton<ICollisionReceiver, EnemyCollisionReceiver>();
     }
     
     

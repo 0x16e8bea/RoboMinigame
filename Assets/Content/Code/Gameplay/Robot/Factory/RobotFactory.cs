@@ -1,6 +1,8 @@
+using Content.Code.Gameplay.Gamepad;
 using Content.Code.Gameplay.Level;
 using Content.Code.Gameplay.Robot.Controller;
 using Content.Code.Gameplay.Robot.Controller.Monobehaviour;
+using Content.Code.Gameplay.Robot.Instance;
 using Content.Code.Gameplay.Robot.Projectiles;
 using Content.Code.Gameplay.Robot.StateMachine;
 using UnityEngine;
@@ -14,25 +16,28 @@ namespace Content.Code.Gameplay.Robot.Factory
         private readonly ILaneManager _laneManager;
         private readonly PlayerInputActions _playerInputActions;
         private readonly RobotSettings _robotSettings;
+        private readonly IHealthIndicatorController _healthIndicatorController;
 
         public RobotFactory(
             RobotFactorySettings robotFactorySettings, 
             IMonoHookManager monoHookManager,
             ILaneManager laneManager,
             PlayerInputActions playerInputActions,
-            RobotSettings robotSettings)
+            RobotSettings robotSettings,
+            IHealthIndicatorController healthIndicatorController)
         {
             _robotFactorySettings = robotFactorySettings;
             _monoHookManager = monoHookManager;
             _laneManager = laneManager;
             _playerInputActions = playerInputActions;
             _robotSettings = robotSettings;
+            _healthIndicatorController = healthIndicatorController;
         }
 
-        public (IRobotController, IRobotStateMachine, IRobotDefinition) InstantiateRobot(Vector3 position = default, Quaternion rotation = default)
+        public IRobotInstance InstantiateRobot(Vector3 position = default, Quaternion rotation = default)
         {
-            var instance = Object.Instantiate(_robotFactorySettings.RobotPrefab, position, rotation);
-            IRobotController? robotController = new RobotController(instance, _monoHookManager, _laneManager, _robotSettings);
+            GameObject? gameObject = Object.Instantiate(_robotFactorySettings.RobotPrefab, position, rotation);
+            IRobotController? robotController = new RobotController(gameObject, _monoHookManager, _laneManager, _robotSettings, _healthIndicatorController);
             IRobotStateMachine? robotStateMachine = new RobotStateMachine(_playerInputActions, robotController);
         
             if (robotController == null)
@@ -40,7 +45,7 @@ namespace Content.Code.Gameplay.Robot.Factory
                 throw new System.Exception("Robot prefab does not have a component implementing IRobotController");
             }
         
-            return (robotController, robotStateMachine, instance.GetComponent<IRobotDefinition>());
+            return new RobotInstance(robotController, robotStateMachine, gameObject.GetComponent<IRobotDefinition>(), new RobotCollisionNotifier(robotController));
         }
     }
 }

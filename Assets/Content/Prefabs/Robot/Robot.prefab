@@ -10013,11 +10013,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272ad3366daf64249b8f18df5280e32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
-  _isGrounded: 1
-  _canShoot: 1
-  _isChangingLanes: 0
-  _velocity: {x: 0, y: 0, z: 0}
+  health: 5
+  isGrounded: 1
+  canShoot: 1
+  isChangingLanes: 0
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!65 &4211334187502792815
 BoxCollider:
   m_ObjectHideFlags: 0

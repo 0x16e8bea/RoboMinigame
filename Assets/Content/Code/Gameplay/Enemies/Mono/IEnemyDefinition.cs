@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Content.Code.Gameplay.Robot.Projectiles;
+using UnityEngine;
 
 namespace Content.Code.Gameplay.Enemies.Mono
 {
@@ -7,5 +8,6 @@ namespace Content.Code.Gameplay.Enemies.Mono
         ParticleSystem ProjectileParticleSystem { get; }
         ParticleSystem DestroyedParticleSystem { get; }
         MeshRenderer MeshRenderer { get; }
+        IParticleCollisionNotifier ParticleCollisionNotifier { get; }
     }
 }

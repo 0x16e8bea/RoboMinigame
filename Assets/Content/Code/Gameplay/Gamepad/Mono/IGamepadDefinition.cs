@@ -12,5 +12,6 @@ namespace Content.Code.Gameplay.Gamepad
         Rigidbody Hinge1RigidBody { get; }
         Rigidbody Hinge2RigidBody { get; }
         Animator Animator { get; }
+        IHealthIndicatorController HealthIndicatorController { get; }
     }
 }

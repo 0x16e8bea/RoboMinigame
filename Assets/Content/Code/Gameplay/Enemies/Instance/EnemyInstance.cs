@@ -1,4 +1,5 @@
 ﻿using System;
+using Content.Code.Gameplay.Enemies.Mono;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,6 +8,8 @@ namespace Content.Code.Gameplay.Enemies.Instance
     public class EnemyInstance : IEnemyInstance
     {
         public int InstanceId { get; } = -1;
+        
+        public IEnemyDefinition EnemyDefinition { get; }
         public int LaneIndex { get; set; } = -1;
         public GameObject GameObject { get; }
         public IEnemyController Controller { get; }
@@ -26,6 +29,7 @@ namespace Content.Code.Gameplay.Enemies.Instance
             InstanceId = gameObject.GetInstanceID();
             Controller = controller;
             StateMachine = stateMachine;
+            EnemyDefinition = gameObject.GetComponent<EnemyDefinition>();
         }
     }
 }

@@ -1,23 +1,23 @@
+using System.Threading;
 using Content.Code.Gameplay.Enemies;
 using Content.Code.Gameplay.Enemies.FX;
+using Content.Code.Gameplay.Enemies.Instance;
 using Content.Code.Gameplay.Gamepad;
-using Content.Code.Gameplay.Robot.Controller;
-using Content.Code.Gameplay.Robot.Controller.Monobehaviour;
 using Content.Code.Gameplay.Robot.Factory;
-using Content.Code.Gameplay.Robot.Projectiles;
-using Content.Code.Gameplay.Robot.StateMachine;
+using Content.Code.Gameplay.Robot.Instance;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Content.Code.Gameplay.Level
 {
     public class LevelLifeCycle : ILevelLifeCycle
     {
+        public ICollisionReceiver CollisionReceiver { get; }
         private readonly IRobotFactory _robotFactory;
         private readonly ILaneManager _laneManager;
         private readonly IEnemySpawner _enemySpawner;
-        private readonly IEnemyRepository _enemyRepository;
-        private readonly IEnemyDeathFXController _enemyDeathFXController;
-
-        private EnemyCollisionNotifier _enemyCollisionNotifier;
+        private ICollisionReceiver _collisionReceiver;
+        private IRobotInstance _robotInstance;
 
         public LevelLifeCycle(
             IRobotFactory robotFactory,
@@ -26,29 +26,48 @@ namespace Content.Code.Gameplay.Level
             IGamepadStateMachine gamepadStateMachine,
             IEnemySpawner enemySpawner,
             IEnemyRepository enemyRepository,
-            IEnemyDeathFXController enemyDeathFXController)
+            IEnemyDeathFXController enemyDeathFXController,
+            ICollisionReceiver collisionReceiver)
         {
+            CollisionReceiver = collisionReceiver;
             _robotFactory = robotFactory;
             _laneManager = laneManager;
             _enemySpawner = enemySpawner;
-            _enemyRepository = enemyRepository;
-            _enemyDeathFXController = enemyDeathFXController;
+            _collisionReceiver = collisionReceiver;
         }
 
         public void InitializeLevel()
         {
-            (IRobotController controller, IRobotStateMachine stateMachine, IRobotDefinition _robotDefinition) = _robotFactory.InstantiateRobot();
-            controller.MoveToLaneInstantly(_laneManager.StartLaneIndex);
-            stateMachine.Start();
+            _robotInstance = _robotFactory.InstantiateRobot();
+            _robotInstance.Controller.MoveToLaneInstantly(_laneManager.StartLaneIndex);
+            _robotInstance.StateMachine.Start();
             
-            // TODO: This could probably be done better if robotDefinition is not passed as a parameter
-            _enemyCollisionNotifier = new EnemyCollisionNotifier(_robotDefinition.ParticleCollisionNotifier, _enemyRepository, _laneManager, _enemyDeathFXController);
-
-            // TODO: Delete this as it is only for testing purposes
-            _enemySpawner.SpawnEnemy<SimpleEnemyRecipe>(0);
-            _enemySpawner.SpawnEnemy<SimpleEnemyRecipe>(1);
-            _enemySpawner.SpawnEnemy<SimpleEnemyRecipe>(2);
+            _collisionReceiver.RegisterCollisions(_robotInstance.RobotDefinition.ParticleCollisionNotifier);
+            
+            SpawnEnemies(new CancellationToken()).Forget();
         }
+        
+        async UniTask SpawnEnemies(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                Debug.Log("Spawning enemy");
+                var randomInterval = UnityEngine.Random.Range(0, _laneManager.LaneCount);
+                IEnemyInstance? enemy = _enemySpawner.SpawnEnemy<SimpleEnemyRecipe>(randomInterval);
+                
+                if (enemy == null)
+                {
+                    await UniTask.Delay(1000, cancellationToken: token);
+                    continue;
+                }
+                
+                _robotInstance.CollisionReceiver.RegisterCollisions(enemy.EnemyDefinition.ParticleCollisionNotifier);
+                await UniTask.Delay(1000, cancellationToken: token);
+            }
+            
+        }
+        
+        
     }
 
 }

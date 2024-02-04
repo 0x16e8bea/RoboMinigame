@@ -12,6 +12,7 @@ namespace Content.Code.Gameplay.Gamepad
         [SerializeField] private Rigidbody _hinge1Rigidbody;
         [SerializeField] private Rigidbody _hinge2Rigidbody;
         [SerializeField] private Animator _animator;
+        [SerializeField] private HealthIndicatorController _healthIndicatorController;
 
 
         public Transform LeftButton => _leftButton;
@@ -21,7 +22,7 @@ namespace Content.Code.Gameplay.Gamepad
         public Transform DPad => _dPad;
         public Rigidbody Hinge1RigidBody => _hinge1Rigidbody;
         public Rigidbody Hinge2RigidBody => _hinge2Rigidbody;
-
         public Animator Animator => _animator;
+        public IHealthIndicatorController HealthIndicatorController => _healthIndicatorController;
     }
 }

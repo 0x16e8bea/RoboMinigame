@@ -21,14 +21,14 @@ namespace Content.Code.Gameplay.Enemies
             _enemyRepository = enemyRepository;
         }
     
-        public void SpawnEnemy<T>(int laneIndex) where T : IEnemyRecipe
+        public IEnemyInstance? SpawnEnemy<T>(int laneIndex) where T : IEnemyRecipe
         {
             var requestedLane = _laneManager.GetLane(laneIndex);
             
             if (requestedLane.IsEnemySpotOccupied)
             {
                 Debug.LogError("Lane is occupied");
-                return;
+                return null;
             }
             
             requestedLane.IsEnemySpotOccupied = true;
@@ -52,6 +52,7 @@ namespace Content.Code.Gameplay.Enemies
             instance.GameObject.transform.position = position + _laneManager.LaneSetup.EnemySpawnOffset * Vector3.forward;
             instance.GameObject.transform.rotation = Quaternion.LookRotation(Vector3.back, Vector3.up);
             
+            return instance;
         }
     }
 }
