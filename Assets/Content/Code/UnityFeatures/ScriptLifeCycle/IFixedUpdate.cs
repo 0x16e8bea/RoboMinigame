@@ -1,5 +1,8 @@
-public interface IFixedUpdate
+namespace Content.Code.UnityFeatures.ScriptLifeCycle
 {
-    bool CanFixedUpdate { get; }
-    void FixedUpdate();
+    public interface IFixedUpdate
+    {
+        bool CanFixedUpdate { get; }
+        void FixedUpdate();
+    }
 }

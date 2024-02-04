@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Content.Code.Gameplay.Enemies.Instance;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Repository
 {
     public interface IEnemyRepository
     {

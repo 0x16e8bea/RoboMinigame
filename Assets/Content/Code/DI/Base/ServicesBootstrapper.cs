@@ -1,8 +1,9 @@
 using System;
+using Content.Code.UnityFeatures.ScriptLifeCycle;
 using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
 
-namespace Content.Code.DI
+namespace Content.Code.DI.Base
 {
     public abstract class ServicesBootstrapper : MonoBehaviour
     {

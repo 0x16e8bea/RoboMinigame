@@ -1,4 +1,4 @@
-﻿namespace Content.Code.Gameplay.Gamepad
+﻿namespace Content.Code.Gameplay.Gamepad.Controller
 {
     public interface IGamepadController
     {

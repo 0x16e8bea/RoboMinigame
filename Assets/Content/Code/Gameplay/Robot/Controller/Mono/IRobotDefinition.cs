@@ -1,7 +1,7 @@
 ﻿using Content.Code.Gameplay.Robot.Projectiles;
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Robot.Controller.Monobehaviour
+namespace Content.Code.Gameplay.Robot.Controller.Mono
 {
     public interface IRobotDefinition
     {

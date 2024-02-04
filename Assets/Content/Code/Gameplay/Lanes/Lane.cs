@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class Lane : MonoBehaviour, ILane
+namespace Content.Code.Gameplay.Lanes
 {
-    [SerializeField] private bool isEnemySpotOccupied;
-    public Transform Transform => transform;
-    public bool IsEnemySpotOccupied
+    public class Lane : MonoBehaviour, ILane
     {
-        get => isEnemySpotOccupied;
-        set
+        [SerializeField] private bool isEnemySpotOccupied;
+        public Transform Transform => transform;
+        public bool IsEnemySpotOccupied
         {
-            Debug.Log("Setting isEnemySpotOccupied to " + value);
-            isEnemySpotOccupied = value;
+            get => isEnemySpotOccupied;
+            set
+            {
+                Debug.Log("Setting isEnemySpotOccupied to " + value);
+                isEnemySpotOccupied = value;
+            }
         }
     }
 }

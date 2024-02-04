@@ -1,6 +1,8 @@
+using Content.Code.Gameplay.Gamepad.Mono;
+using Content.Code.UnityFeatures.ScriptLifeCycle;
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Gamepad
+namespace Content.Code.Gameplay.Gamepad.Controller
 {
     public class GamepadController : IGamepadController
     {
@@ -27,11 +29,13 @@ namespace Content.Code.Gameplay.Gamepad
 
         public void PressLeftButton()
         {
+            Debug.Log("Left button pressed");
             _animator.SetTrigger("Left");
         }
 
         public void PressRightButton()
         {
+            Debug.Log("Right button pressed");
             _animator.SetTrigger("Right");
         }
 

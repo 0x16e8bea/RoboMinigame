@@ -1,7 +1,6 @@
 ﻿using Content.Code.Gameplay.Enemies.Instance;
-using UnityEngine;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Factory.Recipes
 {
     public interface IEnemyRecipe
     {

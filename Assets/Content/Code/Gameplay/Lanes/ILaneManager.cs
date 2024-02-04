@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Level
+namespace Content.Code.Gameplay.Lanes
 {
     public interface ILaneManager
     {

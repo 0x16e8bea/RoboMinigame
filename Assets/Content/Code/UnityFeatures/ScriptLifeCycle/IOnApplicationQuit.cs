@@ -1,4 +1,7 @@
-public interface IOnApplicationQuit
+namespace Content.Code.UnityFeatures.ScriptLifeCycle
 {
-    void OnApplicationQuit();
+    public interface IOnApplicationQuit
+    {
+        void OnApplicationQuit();
+    }
 }

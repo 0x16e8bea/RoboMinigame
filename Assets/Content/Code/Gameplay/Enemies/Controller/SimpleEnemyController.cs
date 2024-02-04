@@ -1,9 +1,7 @@
-using System;
 using Content.Code.Gameplay.Enemies.Mono;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Controller
 {
     /// <summary>
     /// Enemy that shoots and does not move

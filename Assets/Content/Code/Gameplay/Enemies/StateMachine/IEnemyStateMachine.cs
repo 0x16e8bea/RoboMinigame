@@ -1,4 +1,4 @@
-﻿namespace Content.Code.Gameplay.Enemies
+﻿namespace Content.Code.Gameplay.Enemies.StateMachine
 {
     public interface IEnemyStateMachine
     {

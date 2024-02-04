@@ -1,8 +1,9 @@
-﻿using Content.Code.Gameplay.Enemies.Instance;
-using Content.Code.Gameplay.Enemies.Mono;
+﻿using Content.Code.Gameplay.Enemies.Controller;
+using Content.Code.Gameplay.Enemies.Instance;
+using Content.Code.Gameplay.Enemies.StateMachine;
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Factory.Recipes
 {
     public record SimpleEnemyRecipe(GameObject Prefab) : IEnemyRecipe
     {

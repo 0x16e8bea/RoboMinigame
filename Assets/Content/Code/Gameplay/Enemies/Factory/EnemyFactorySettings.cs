@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Factory
 {
     public record EnemyFactorySettings(
         GameObject Enemy1Prefab, 

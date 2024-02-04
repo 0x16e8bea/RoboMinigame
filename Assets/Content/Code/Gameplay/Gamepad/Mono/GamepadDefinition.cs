@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Content.Code.Gameplay.Gamepad.Health;
+using UnityEngine;
 
-namespace Content.Code.Gameplay.Gamepad
+namespace Content.Code.Gameplay.Gamepad.Mono
 {
     public class GamepadDefinition : MonoBehaviour, IGamepadDefinition
     {

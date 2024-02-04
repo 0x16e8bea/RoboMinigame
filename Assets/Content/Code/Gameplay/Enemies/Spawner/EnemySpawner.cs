@@ -1,9 +1,11 @@
-
+using Content.Code.Gameplay.Enemies.Factory;
+using Content.Code.Gameplay.Enemies.Factory.Recipes;
 using Content.Code.Gameplay.Enemies.Instance;
-using Content.Code.Gameplay.Level;
+using Content.Code.Gameplay.Enemies.Repository;
+using Content.Code.Gameplay.Lanes;
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Spawner
 {
     public class EnemySpawner : IEnemySpawner
     {

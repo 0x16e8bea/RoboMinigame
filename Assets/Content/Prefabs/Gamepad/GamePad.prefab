@@ -1407,7 +1407,6 @@ GameObject:
   - component: {fileID: 8059340458665627750}
   - component: {fileID: 3207497042873077808}
   - component: {fileID: 6487609799025695611}
-  - component: {fileID: 6045321204125567999}
   m_Layer: 0
   m_Name: GamePad
   m_TagString: Untagged
@@ -1492,19 +1491,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6045321204125567999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078214328829281764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3657d799c17764aae54d12bb941236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderedHealthIndicators: []
 --- !u!1 &9202996157723170738
 GameObject:
   m_ObjectHideFlags: 0

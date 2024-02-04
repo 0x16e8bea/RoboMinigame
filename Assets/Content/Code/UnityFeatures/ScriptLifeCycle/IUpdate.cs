@@ -1,5 +1,8 @@
-public interface IUpdate
+namespace Content.Code.UnityFeatures.ScriptLifeCycle
 {
-    public bool CanUpdate { get; } 
-    public void Update();
+    public interface IUpdate
+    {
+        public bool CanUpdate { get; } 
+        public void Update();
+    }
 }

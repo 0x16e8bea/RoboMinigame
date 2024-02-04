@@ -1,7 +1,10 @@
 ﻿using Content.Code.Gameplay.Robot.Projectiles;
 
-public interface ICollisionReceiver
+namespace Content.Code.Common.Collision
 {
-    void RegisterCollisions(IParticleCollisionNotifier robotDefinition);
-    void UnregisterCollisions(IParticleCollisionNotifier robotDefinition);
+    public interface ICollisionReceiver
+    {
+        void RegisterCollisions(IParticleCollisionNotifier robotDefinition);
+        void UnregisterCollisions(IParticleCollisionNotifier robotDefinition);
+    }
 }

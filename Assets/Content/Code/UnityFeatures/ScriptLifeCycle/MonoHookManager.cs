@@ -1,53 +1,56 @@
 using System.Collections.Generic;
 
-public class MonoHookManager : IMonoHookManager
+namespace Content.Code.UnityFeatures.ScriptLifeCycle
 {
-    private readonly ICollection<IUpdate> _updateEnumerator = new List<IUpdate>();
-    private readonly ICollection<IFixedUpdate> _fixedUpdateEnumerator = new List<IFixedUpdate>();
-    private readonly ICollection<IOnApplicationQuit> _applicationQuitEnumerator = new List<IOnApplicationQuit>();
-
-    public void AddUpdateListener(IUpdate update)
+    public class MonoHookManager : IMonoHookManager
     {
-        _updateEnumerator.Add(update);
-    }
+        private readonly ICollection<IUpdate> _updateEnumerator = new List<IUpdate>();
+        private readonly ICollection<IFixedUpdate> _fixedUpdateEnumerator = new List<IFixedUpdate>();
+        private readonly ICollection<IOnApplicationQuit> _applicationQuitEnumerator = new List<IOnApplicationQuit>();
 
-    public void RemoveUpdateListener(IUpdate update)
-    {
-        _updateEnumerator.Remove(update);
-    }
+        public void AddUpdateListener(IUpdate update)
+        {
+            _updateEnumerator.Add(update);
+        }
 
-    public void AddFixedUpdateListener(IFixedUpdate update)
-    {
-        _fixedUpdateEnumerator.Add(update);
-    }
+        public void RemoveUpdateListener(IUpdate update)
+        {
+            _updateEnumerator.Remove(update);
+        }
 
-    public void RemoveFixedUpdateListener(IFixedUpdate update)
-    {
-        _fixedUpdateEnumerator.Remove(update);
-    }
+        public void AddFixedUpdateListener(IFixedUpdate update)
+        {
+            _fixedUpdateEnumerator.Add(update);
+        }
 
-    public void AddOnApplicationQuitListener(IOnApplicationQuit onApplicationQuit)
-    {
-        _applicationQuitEnumerator.Add(onApplicationQuit);
-    }
+        public void RemoveFixedUpdateListener(IFixedUpdate update)
+        {
+            _fixedUpdateEnumerator.Remove(update);
+        }
 
-    public void RemoveOnApplicationQuitListener(IOnApplicationQuit onApplicationQuit)
-    {
-        _applicationQuitEnumerator.Remove(onApplicationQuit);
-    }
+        public void AddOnApplicationQuitListener(IOnApplicationQuit onApplicationQuit)
+        {
+            _applicationQuitEnumerator.Add(onApplicationQuit);
+        }
 
-    public IEnumerable<IUpdate> UpdateEnumerator()
-    {
-        return _updateEnumerator;
-    }
+        public void RemoveOnApplicationQuitListener(IOnApplicationQuit onApplicationQuit)
+        {
+            _applicationQuitEnumerator.Remove(onApplicationQuit);
+        }
 
-    public IEnumerable<IFixedUpdate> FixedUpdateEnumerator()
-    {
-        return _fixedUpdateEnumerator;
-    }
+        public IEnumerable<IUpdate> UpdateEnumerator()
+        {
+            return _updateEnumerator;
+        }
 
-    public IEnumerable<IOnApplicationQuit> OnApplicationQuitEnumerator()
-    {
-        return _applicationQuitEnumerator;
+        public IEnumerable<IFixedUpdate> FixedUpdateEnumerator()
+        {
+            return _fixedUpdateEnumerator;
+        }
+
+        public IEnumerable<IOnApplicationQuit> OnApplicationQuitEnumerator()
+        {
+            return _applicationQuitEnumerator;
+        }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public interface ILane
+namespace Content.Code.Gameplay.Lanes
 {
-    Transform Transform { get; }
-    bool IsEnemySpotOccupied { get; set; }
+    public interface ILane
+    {
+        Transform Transform { get; }
+        bool IsEnemySpotOccupied { get; set; }
+    }
 }

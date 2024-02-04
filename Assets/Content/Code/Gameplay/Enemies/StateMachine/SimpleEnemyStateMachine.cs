@@ -1,8 +1,9 @@
 using System.Threading;
+using Content.Code.Gameplay.Enemies.Controller;
 using Cysharp.Threading.Tasks;
 using UnityHFSM;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.StateMachine
 {
     public class SimpleEnemyStateMachine : IEnemyStateMachine
     {

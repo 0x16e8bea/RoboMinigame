@@ -1,7 +1,8 @@
-﻿using UnityEngine.InputSystem;
+﻿using Content.Code.Gameplay.Gamepad.Controller;
+using UnityEngine.InputSystem;
 using UnityHFSM;
 
-namespace Content.Code.Gameplay.Gamepad
+namespace Content.Code.Gameplay.Gamepad.StateMachine
 {
     public class GamepadStateMachine : IGamepadStateMachine, PlayerInputActions.IDefaultActions
     {

@@ -2,7 +2,7 @@
 using Content.Code.Gameplay.Enemies.Instance;
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Enemies
+namespace Content.Code.Gameplay.Enemies.Repository
 {
     public class EnemyRepository : IEnemyRepository
     {

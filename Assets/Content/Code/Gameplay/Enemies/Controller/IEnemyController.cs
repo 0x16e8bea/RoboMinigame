@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Content.Code.Gameplay.Enemies
+﻿namespace Content.Code.Gameplay.Enemies.Controller
 {
     public interface IEnemyController
     {
