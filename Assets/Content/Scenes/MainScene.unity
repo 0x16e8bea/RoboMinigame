@@ -621,7 +621,7 @@ MonoBehaviour:
   - {fileID: 1076027894}
   startLane: 1
   playerSpawnOffset: 2.69
-  enemySpawnOffset: 17.7
+  enemySpawnOffset: 24.2
 --- !u!4 &850404918
 Transform:
   m_ObjectHideFlags: 0
