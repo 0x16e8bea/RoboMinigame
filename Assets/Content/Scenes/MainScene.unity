@@ -604,9 +604,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lanes:
-  - {fileID: 1194905855}
-  - {fileID: 1369064931}
-  - {fileID: 1076027893}
+  - {fileID: 1194905856}
+  - {fileID: 1369064932}
+  - {fileID: 1076027894}
   startLane: 1
   playerSpawnOffset: 2.69
   enemySpawnOffset: 17.7
