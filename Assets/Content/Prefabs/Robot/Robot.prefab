@@ -4932,7 +4932,7 @@ Transform:
   m_GameObject: {fileID: 7804129809557403145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.668, z: 0}
+  m_LocalPosition: {x: 0, y: 1.195, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9730,7 +9730,7 @@ ParticleSystemRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7804129809557403145}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -9830,17 +9830,17 @@ PrefabInstance:
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.71
+      value: 0.89000005
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.71
+      value: 0.89000005
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.71
+      value: 0.89000005
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
@@ -9850,12 +9850,12 @@ PrefabInstance:
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.98
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.18
       objectReference: {fileID: 0}
     - target: {fileID: 9209536129943282759, guid: 915cb8708e37e804ebd2cfbdcebd1a7b,
         type: 3}
