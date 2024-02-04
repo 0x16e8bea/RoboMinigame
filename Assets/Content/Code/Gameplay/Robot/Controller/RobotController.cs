@@ -51,6 +51,8 @@ namespace Content.Code.Gameplay.Robot.Controller
         {
             _robotData.Velocity = Vector3.up * Mathf.Sqrt(2 * _robotSettings.RegularJumpHeight * Physics.gravity.magnitude);
             _robotData.IsGrounded = false;
+            
+            _robotDefinition.RobotAnimator.SetTrigger("Jump");
         }
 
         public void MoveToLaneInstantly(int laneIndex)
@@ -61,6 +63,8 @@ namespace Content.Code.Gameplay.Robot.Controller
 
         private async UniTask<bool> MoveToLaneParabola(int laneIndex)
         {
+            _robotDefinition.RobotAnimator.enabled = false;
+
             Vector3 currentPos = _laneManager.GetLanePos(_currentLane);
             Vector3 targetPos = _laneManager.GetLanePos(laneIndex);
             Vector3 direction = targetPos - currentPos;
@@ -81,13 +85,20 @@ namespace Content.Code.Gameplay.Robot.Controller
                 accumulatedDistance += distanceThisFrame;
 
                 // Calculate the current position based on the accumulated distance
-                float xPos = Mathf.Lerp(startPos.x, targetPos.x, _robotSettings.LaneChangeAnimCurve.Evaluate(accumulatedDistance / totalDistance));
-                float yPos = SimpleQuadraticSolver.CalculateY(xPos, coefficients);
+                float time = accumulatedDistance / totalDistance;
                 
+                // Evaluate the animation clip over time
+                _robotDefinition.JumpAnimation.SampleAnimation(_robotInstance, _robotSettings.LaneChangeAnimCurve.Evaluate(time) * _robotDefinition.JumpAnimation.length);
+                
+                float xPos = Mathf.Lerp(startPos.x, targetPos.x, time);
+                float yPos = SimpleQuadraticSolver.CalculateY(xPos, coefficients);
+
                 // Update the robot's position
                 _robotInstance.transform.position = new Vector3(xPos, yPos, currentPos.z);
                 await UniTask.Yield(PlayerLoopTiming.Update);
             }
+            
+            _robotDefinition.RobotAnimator.enabled = true;
             
             return true;
         }
@@ -96,6 +107,7 @@ namespace Content.Code.Gameplay.Robot.Controller
         {
             _robotDefinition.BlastAnimator.SetTrigger(ShootTrigger);
             _robotDefinition.BlastParticleSystem.Play();
+            _robotDefinition.RobotAnimator.SetTrigger("Shoot");
         }
 
         public void TakeDamage()

@@ -8,5 +8,7 @@ namespace Content.Code.Gameplay.Robot.Controller.Mono
         Animator BlastAnimator { get; }
         ParticleSystem BlastParticleSystem { get; }
         IParticleCollisionNotifier ParticleCollisionNotifier { get; }
+        AnimationClip JumpAnimation { get; }
+        Animator RobotAnimator { get; }
     }
 }

@@ -14,27 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laneChangePeakHeight: 1
   regularJumpHeight: 12
-  laneChangeDuration: 0.3
+  laneChangeDuration: 0.5
   laneChangeAnimCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2.3901274
+      outSlope: 2.3901274
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.6894973
+    - serializedVersion: 3
+      time: 0.19273514
+      value: 0.52306485
+      inSlope: 2.5152023
+      outSlope: 0.30380982
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.2760279
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.70544016
+      value: 0.67882967
+      inSlope: 0.30960962
+      outSlope: 1.0374788
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.44929755
+      outWeight: 0.39094868
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 1.1049161
+      outSlope: 1.1049161
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.42859155
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
