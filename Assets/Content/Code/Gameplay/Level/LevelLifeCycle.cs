@@ -54,11 +54,13 @@ namespace Content.Code.Gameplay.Level
             SpawnEnemies(new CancellationToken()).Forget();
         }
         
+        // TODO: This is just a placeholder, it should be replaced with a proper implementation.
         async UniTask SpawnEnemies(CancellationToken token)
         {
+            await UniTask.Delay(500, cancellationToken: token);
+
             while (!token.IsCancellationRequested)
             {
-                Debug.Log("Spawning enemy");
                 var randomInterval = UnityEngine.Random.Range(0, _laneManager.LaneCount);
                 IEnemyInstance? enemy = _enemySpawner.SpawnEnemy<SimpleEnemyRecipe>(randomInterval);
                 

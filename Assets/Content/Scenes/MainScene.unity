@@ -5965,7 +5965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5943fc53b2110504fb9953fc8abe759c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotPrefab: {fileID: 1996375542059580038, guid: a44e53b0196800e42932eeb07735715b,
+  robotPrefab: {fileID: 5226872664016792916, guid: a44e53b0196800e42932eeb07735715b,
     type: 3}
   gamepadPrefab: {fileID: 721363058}
   laneSetup: {fileID: 850404917}
@@ -6078,11 +6078,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 577626470758537708, guid: 1d8833ef412f80d47a5d0f5f252156dc,
+        type: 3}
+      propertyPath: m_Limits.max
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 577626470758537708, guid: 1d8833ef412f80d47a5d0f5f252156dc,
+        type: 3}
+      propertyPath: m_Limits.min
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1082706371826285062, guid: 1d8833ef412f80d47a5d0f5f252156dc,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 94cd1df492da0d34798d82c0b6a5f1db, type: 2}
+    - target: {fileID: 1128892745753484340, guid: 1d8833ef412f80d47a5d0f5f252156dc,
+        type: 3}
+      propertyPath: m_Limits.max
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1128892745753484340, guid: 1d8833ef412f80d47a5d0f5f252156dc,
+        type: 3}
+      propertyPath: m_Limits.min
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1327244667261425362, guid: 1d8833ef412f80d47a5d0f5f252156dc,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -6231,6 +6251,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6824356899428623677, guid: e5da08245abfeb24b8308184b30ff8ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6242,11 +6267,11 @@ SceneRoots:
   m_Roots:
   - {fileID: 1652284325}
   - {fileID: 330585546}
-  - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 1707756760}
+  - {fileID: 410087041}
   - {fileID: 826843114}
   - {fileID: 2805059014337272875}
-  - {fileID: 1707756760}
   - {fileID: 850404918}
   - {fileID: 861276135}
   - {fileID: 1449423663}

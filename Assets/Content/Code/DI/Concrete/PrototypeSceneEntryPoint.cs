@@ -23,7 +23,8 @@ namespace Content.Code.DI.Concrete
     public class PrototypeSceneEntryPoint : ServicesBootstrapper
     {
         ServicesBootstrapper _servicesBootstrapper;
-    
+        private PlayerInputActions _playerInputActions;
+
         #region Serialized fields
 
         [SerializeField] private GameObject robotPrefab;
@@ -32,15 +33,10 @@ namespace Content.Code.DI.Concrete
         [SerializeField] private RobotSettings robotSettings;
         [SerializeField] private EnemyDeathFXController enemyDeathFXController;
         [SerializeField] private HealthIndicatorController healthIndicatorController;
-    
-
         [SerializeField] private GameObject enemy1Prefab;
-
-
+        
         #endregion
-    
-        private PlayerInputActions _playerInputActions;
-
+        
         protected override void Setup()
         {
             InitializeAndEnablePlayerInput();
