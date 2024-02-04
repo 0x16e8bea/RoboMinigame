@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public interface IRobotDefinition
+namespace Content.Code.Gameplay.Robot.Controller.Monobehaviour
 {
-    Animator BlastAnimator { get; }
-    ParticleSystem BlastParticleSystem { get; }
+    public interface IRobotDefinition
+    {
+        Animator BlastAnimator { get; }
+        ParticleSystem BlastParticleSystem { get; }
+    }
 }

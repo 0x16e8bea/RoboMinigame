@@ -1,6 +1,6 @@
 ﻿namespace Content.Code.Gameplay.Enemies
 {
-    public interface IEnemyFactory
+    public interface IEnemyStateMachine
     {
     }
 }

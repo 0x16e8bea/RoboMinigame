@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public interface ILaneSetup
+namespace Content.Code.Gameplay.Level
 {
-    Transform[] Lanes { get; }
-    int StartLane { get; }
-    float PlayerSpawnOffset { get; }
-    float EnemySpawnOffset { get; }
+    public interface ILaneSetup
+    {
+        Transform[] Lanes { get; }
+        int StartLane { get; }
+        float PlayerSpawnOffset { get; }
+        float EnemySpawnOffset { get; }
+    }
 }

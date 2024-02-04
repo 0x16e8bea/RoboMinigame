@@ -1,3 +1,6 @@
 ﻿using UnityEngine;
 
-public record GamepadControllerSettings(GameObject GamepadPrefab);
+namespace Content.Code.Gameplay.Gamepad
+{
+    public record GamepadControllerSettings(GameObject GamepadPrefab);
+}

@@ -1,8 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-public interface IParticleCollisionNotifier
+namespace Content.Code.Gameplay.Robot.Projectiles
 {
-    void AddListener(Action<GameObject> action);
-    void RemoveListener(Action<GameObject> action);
+    public interface IParticleCollisionNotifier
+    {
+        void AddListener(Action<GameObject> action);
+        void RemoveListener(Action<GameObject> action);
+    }
 }

@@ -1,4 +1,7 @@
-public interface ILevelLifeCycle
+namespace Content.Code.Gameplay.Level
 {
-    public void InitializeLevel();
+    public interface ILevelLifeCycle
+    {
+        public void InitializeLevel();
+    }
 }

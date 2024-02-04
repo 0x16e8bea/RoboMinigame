@@ -1,4 +1,7 @@
-public interface IRobotStateMachine
+namespace Content.Code.Gameplay.Robot.StateMachine
 {
-    void Start();
+    public interface IRobotStateMachine
+    {
+        void Start();
+    }
 }

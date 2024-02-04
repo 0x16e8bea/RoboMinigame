@@ -1,41 +1,43 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class RobotData : MonoBehaviour, IRobotData
+namespace Content.Code.Gameplay.Robot.State
 {
-    [SerializeField] private int _health;
-    [SerializeField] private bool _isGrounded;
-    [SerializeField] private bool _canShoot;
-    [SerializeField] private bool _isChangingLanes;
-    [SerializeField] private Vector3 _velocity;
-    
-    public int Health
+    public class RobotData : MonoBehaviour, IRobotData
     {
-        get => _health;
-        set => _health = value;
-    }
+        [SerializeField] private int _health;
+        [SerializeField] private bool _isGrounded;
+        [SerializeField] private bool _canShoot;
+        [SerializeField] private bool _isChangingLanes;
+        [SerializeField] private Vector3 _velocity;
     
-    public bool IsGrounded
-    {
-        get => _isGrounded;
-        set => _isGrounded = value;
-    }
+        public int Health
+        {
+            get => _health;
+            set => _health = value;
+        }
     
-    public bool CanShoot
-    {
-        get => _canShoot;
-        set => _canShoot = value;
-    }
+        public bool IsGrounded
+        {
+            get => _isGrounded;
+            set => _isGrounded = value;
+        }
     
-    public bool IsChangingLanes
-    {
-        get => _isChangingLanes;
-        set => _isChangingLanes = value;
-    }
+        public bool CanShoot
+        {
+            get => _canShoot;
+            set => _canShoot = value;
+        }
     
-    public Vector3 Velocity
-    {
-        get => _velocity;
-        set => _velocity = value;
+        public bool IsChangingLanes
+        {
+            get => _isChangingLanes;
+            set => _isChangingLanes = value;
+        }
+    
+        public Vector3 Velocity
+        {
+            get => _velocity;
+            set => _velocity = value;
+        }
     }
 }

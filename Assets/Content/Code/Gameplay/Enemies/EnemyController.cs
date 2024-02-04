@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyController : IEnemyController
+namespace Content.Code.Gameplay.Enemies
 {
-    public void Attack()
+    public class EnemyController : IEnemyController
     {
+        public void Attack()
+        {
         
-    }
+        }
 
-    public void Move()
-    {
+        public void Move()
+        {
         
-    }
+        }
 
-    public void Kill()
-    {
+        public void Kill()
+        {
         
+        }
     }
 }

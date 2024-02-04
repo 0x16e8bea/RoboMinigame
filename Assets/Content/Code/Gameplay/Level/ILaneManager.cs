@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public interface ILaneManager
+namespace Content.Code.Gameplay.Level
 {
-    Vector3 GetLanePos(int laneIndex);
-    Vector3 GetNextLanePos(int laneIndex);
-    Vector3 GetPreviousLanePos(int laneIndex);
-    ILaneSetup LaneSetup { get; }
-    int StartLaneIndex { get; }
-    int LaneCount { get; }
+    public interface ILaneManager
+    {
+        Vector3 GetLanePos(int laneIndex);
+        Vector3 GetNextLanePos(int laneIndex);
+        Vector3 GetPreviousLanePos(int laneIndex);
+        ILaneSetup LaneSetup { get; }
+        int StartLaneIndex { get; }
+        int LaneCount { get; }
+    }
 }

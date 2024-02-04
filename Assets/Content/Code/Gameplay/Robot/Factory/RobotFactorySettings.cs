@@ -1,4 +1,7 @@
 using UnityEngine;
 
-public record RobotFactorySettings(
-    GameObject RobotPrefab);
+namespace Content.Code.Gameplay.Robot.Factory
+{
+    public record RobotFactorySettings(
+        GameObject RobotPrefab);
+}

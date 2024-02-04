@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Content.Code.Gameplay.Robot
+namespace Content.Code.Gameplay.Robot.Controller
 {
     [CreateAssetMenu(menuName = "Gameplay/Create RobotSettings", fileName = "RobotSettings", order = 0)]
     public class RobotSettings : ScriptableObject

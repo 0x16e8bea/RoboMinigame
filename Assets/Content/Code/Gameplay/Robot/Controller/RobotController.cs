@@ -1,7 +1,12 @@
+using Content.Code.Gameplay.Level;
+using Content.Code.Gameplay.Robot.Controller.Monobehaviour;
+using Content.Code.Gameplay.Robot.Factory;
+using Content.Code.Gameplay.Robot.State;
+using Content.Code.Gameplay.Robot.Utilities;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Content.Code.Gameplay.Robot
+namespace Content.Code.Gameplay.Robot.Controller
 {
     public class RobotController : IRobotController, IUpdate
     {

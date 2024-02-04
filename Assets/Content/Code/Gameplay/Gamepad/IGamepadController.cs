@@ -1,10 +1,13 @@
-﻿public interface IGamepadController
+﻿namespace Content.Code.Gameplay.Gamepad
 {
-    void ApplyForceToDPad();
-    void PressLeftButton();
-    void PressRightButton();
-    void PressAButton();
-    void PressBButton();
-    void ApplyForceToAButton();
-    void ApplyForceToBButton();
+    public interface IGamepadController
+    {
+        void ApplyForceToDPad();
+        void PressLeftButton();
+        void PressRightButton();
+        void PressAButton();
+        void PressBButton();
+        void ApplyForceToAButton();
+        void ApplyForceToBButton();
+    }
 }

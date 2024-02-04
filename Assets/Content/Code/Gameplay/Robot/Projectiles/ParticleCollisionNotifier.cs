@@ -1,32 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class ParticleCollisionNotifier : MonoBehaviour, IParticleCollisionNotifier
+namespace Content.Code.Gameplay.Robot.Projectiles
 {
-    delegate void OnParticleCollisionDelegate(GameObject other);
-
-    private OnParticleCollisionDelegate? _onParticleCollisionDelegate;
-
-    public void AddListener(Action<GameObject> action)
+    public class ParticleCollisionNotifier : MonoBehaviour, IParticleCollisionNotifier
     {
-        _onParticleCollisionDelegate += action.Invoke;
-    }
+        delegate void OnParticleCollisionDelegate(GameObject other);
 
-    public void RemoveListener(Action<GameObject> action)
-    {
-        _onParticleCollisionDelegate -= action.Invoke;
-    }
+        private OnParticleCollisionDelegate? _onParticleCollisionDelegate;
 
-    void OnParticleCollision(GameObject other)
-    {
-        Debug.Log("Collision with " + other.name);
-
-        if (_onParticleCollisionDelegate != null)
+        public void AddListener(Action<GameObject> action)
         {
-            _onParticleCollisionDelegate.Invoke(other);
+            _onParticleCollisionDelegate += action.Invoke;
+        }
+
+        public void RemoveListener(Action<GameObject> action)
+        {
+            _onParticleCollisionDelegate -= action.Invoke;
+        }
+
+        void OnParticleCollision(GameObject other)
+        {
+            Debug.Log("Collision with " + other.name);
+
+            if (_onParticleCollisionDelegate != null)
+            {
+                _onParticleCollisionDelegate.Invoke(other);
+            }
         }
     }
 }

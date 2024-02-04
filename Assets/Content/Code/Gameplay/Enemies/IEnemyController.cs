@@ -1,6 +1,9 @@
-﻿public interface IEnemyController
+﻿namespace Content.Code.Gameplay.Enemies
 {
-    void Attack();
-    void Move();
-    void Kill();
+    public interface IEnemyController
+    {
+        void Attack();
+        void Move();
+        void Kill();
+    }
 }

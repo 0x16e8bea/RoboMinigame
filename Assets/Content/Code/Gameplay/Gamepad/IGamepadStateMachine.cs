@@ -1,4 +1,6 @@
-﻿public interface IGamepadStateMachine
+﻿namespace Content.Code.Gameplay.Gamepad
 {
-    
+    public interface IGamepadStateMachine
+    {
+    }
 }
