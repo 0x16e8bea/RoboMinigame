@@ -1,6 +1,6 @@
 # Game Programmer Interview Test - README
 
-![](https://i.imgur.com/4sWm1dV.png)
+<img src="https://i.imgur.com/4sWm1dV.png" width="250" alt="image description" />
 
 ## Project Overview
 
