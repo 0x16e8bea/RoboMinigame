@@ -1,5 +1,7 @@
 # Game Programmer Interview Test - README
 
+![](https://i.imgur.com/4sWm1dV.png)
+
 ## Project Overview
 
 This project introduces a minigame where players control a robot using a gamepad reminiscent of the classic SNES controller. Created as part of a game programmer interview, the focus was on demonstrating coding practices and design concepts rather than completing every game mechanic.
