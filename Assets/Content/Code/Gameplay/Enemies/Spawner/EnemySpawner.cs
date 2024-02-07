@@ -29,7 +29,7 @@ namespace Content.Code.Gameplay.Enemies.Spawner
             
             if (requestedLane.IsEnemySpotOccupied)
             {
-                Debug.LogError("Lane is occupied");
+                Debug.LogWarning("Lane is occupied");
                 return null;
             }
             
