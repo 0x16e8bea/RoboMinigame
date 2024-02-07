@@ -5974,6 +5974,10 @@ MonoBehaviour:
   healthIndicatorController: {fileID: 721363064}
   enemy1Prefab: {fileID: 8937705605061878115, guid: 565c905fa61f19f41ac0ed9bf6c9388e,
     type: 3}
+  enemy2Prefab: {fileID: 8937705605061878115, guid: 461fc543cc3954b8f910dbd2ec426452,
+    type: 3}
+  enemy3Prefab: {fileID: 8937705605061878115, guid: 4a0e671b68b9c4c93a0ca36b40ee57c1,
+    type: 3}
 --- !u!4 &1652284325
 Transform:
   m_ObjectHideFlags: 0
