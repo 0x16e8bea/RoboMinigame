@@ -46,7 +46,7 @@ namespace Content.Code.Gameplay.Enemies.StateMachine
             
         }
         
-        public void OnDeath()
+        public void OnDestroy()
         {
             CancelAttack();
         }

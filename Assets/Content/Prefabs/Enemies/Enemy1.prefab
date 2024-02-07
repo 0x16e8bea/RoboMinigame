@@ -4840,7 +4840,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aba5e898dc51cf448db2e4e6fd0b859, type: 2}
+  - {fileID: 2100000, guid: b411eb2ab02a24fabb55856ffbb005d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4949,7 +4949,7 @@ GameObject:
   - component: {fileID: 8435136653743714930}
   - component: {fileID: 4240237375324356167}
   m_Layer: 7
-  m_Name: Enemy1
+  m_Name: MeshRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5002,7 +5002,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aba5e898dc51cf448db2e4e6fd0b859, type: 2}
+  - {fileID: 2100000, guid: b411eb2ab02a24fabb55856ffbb005d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9862,7 +9862,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aba5e898dc51cf448db2e4e6fd0b859, type: 2}
+  - {fileID: 2100000, guid: b411eb2ab02a24fabb55856ffbb005d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9941,13 +9941,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7668142615139783406}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7962946351050326181}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!198 &4933629188376578457
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14753,7 +14753,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aba5e898dc51cf448db2e4e6fd0b859, type: 2}
+  - {fileID: 2100000, guid: b411eb2ab02a24fabb55856ffbb005d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -46,6 +46,10 @@ namespace Content.Code.Gameplay.Enemies.Spawner
             instance.LaneIndex = laneIndex;
             
             _laneManager.GetLane(laneIndex).IsEnemySpotOccupied = true;
+            instance.OnDestroyed += enemyInstance =>
+            {
+                _laneManager.GetLane(enemyInstance.LaneIndex).IsEnemySpotOccupied = false;
+            };
             
             _enemyRepository.AddEnemy(instance);
         

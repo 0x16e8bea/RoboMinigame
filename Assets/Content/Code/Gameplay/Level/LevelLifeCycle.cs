@@ -61,7 +61,7 @@ namespace Content.Code.Gameplay.Level
 
             while (!token.IsCancellationRequested)
             {
-                var randomInterval = UnityEngine.Random.Range(0, _laneManager.LaneCount);
+                var randomInterval = Random.Range(0, _laneManager.LaneCount);
                 IEnemyInstance? enemy = _enemySpawner.SpawnEnemy<SimpleEnemyRecipe>(randomInterval);
                 
                 if (enemy == null)

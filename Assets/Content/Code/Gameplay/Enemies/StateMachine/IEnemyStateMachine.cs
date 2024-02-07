@@ -2,6 +2,6 @@
 {
     public interface IEnemyStateMachine
     {
-        void OnDeath();
+        void OnDestroy();
     }
 }

@@ -41,10 +41,9 @@ namespace Content.Code.Gameplay.Enemies.Collision
             // Try to get the enemy from the repository using the GameObject instance ID
             if (_enemyRepository.TryGetEnemy(other.GetInstanceID(), out IEnemyInstance instance))
             {
-                _laneManager.GetLane(instance.LaneIndex).IsEnemySpotOccupied = false;
-                instance.Destroy();
-                _enemyRepository.RemoveEnemy(instance);
-                _enemyDeathFXController.PlayDeathParticlesAtLocation(instance.GameObject.transform.position);
+                instance.Controller.PlayDeathAnimation();
+                instance.DestroyAfterParticles().Forget();
+                
             }
         }
     

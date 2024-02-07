@@ -4,5 +4,6 @@
     {
         void Attack();
         void Move();
+        void PlayDeathAnimation();
     }
 }

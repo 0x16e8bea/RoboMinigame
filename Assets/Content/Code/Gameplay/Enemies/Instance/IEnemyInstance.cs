@@ -2,6 +2,7 @@
 using Content.Code.Gameplay.Enemies.Controller;
 using Content.Code.Gameplay.Enemies.Mono;
 using Content.Code.Gameplay.Enemies.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Content.Code.Gameplay.Enemies.Instance
@@ -18,6 +19,6 @@ namespace Content.Code.Gameplay.Enemies.Instance
         // TODO: Decide to keep this or not. Right now it is just used for the repository to remove the enemy from the list.
         event Action<IEnemyInstance> OnDestroyed;
         
-        public void Destroy();
+        public UniTaskVoid DestroyAfterParticles();
     }
 }

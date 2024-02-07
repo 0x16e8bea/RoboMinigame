@@ -1,4 +1,5 @@
 using Content.Code.Gameplay.Enemies.Mono;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Content.Code.Gameplay.Enemies.Controller
@@ -21,10 +22,16 @@ namespace Content.Code.Gameplay.Enemies.Controller
         {
             _enemyDefinition.ProjectileParticleSystem.Play();
         }
+        
+        public void PlayDeathAnimation()
+        {
+            _enemyDefinition.DestroyedParticleSystem.Play();
+        }
 
         public void Move()
         {
+            
         }
-
+        
     }
 }

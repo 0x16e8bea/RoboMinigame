@@ -2,6 +2,7 @@
 using Content.Code.Gameplay.Enemies.Controller;
 using Content.Code.Gameplay.Enemies.Mono;
 using Content.Code.Gameplay.Enemies.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -18,11 +19,39 @@ namespace Content.Code.Gameplay.Enemies.Instance
         public IEnemyStateMachine StateMachine { get; }
         public event Action<IEnemyInstance> OnDestroyed;
         
-        public void Destroy()
+        public void DestroyImmediate()
         {
             Object.Destroy(GameObject);
-            StateMachine.OnDeath();
             OnDestroyed?.Invoke(this);
+        }
+        
+        public async UniTaskVoid DestroyAfterParticles()
+        {
+            StateMachine.OnDestroy();
+            
+            // Wait one frame
+            await UniTask.Yield();
+
+            var meshRenderer = EnemyDefinition.MeshRenderer;
+            meshRenderer.enabled = false;
+
+            var projectileParticleSystem = EnemyDefinition.ProjectileParticleSystem;
+            var destroyedParticleSystem = EnemyDefinition.DestroyedParticleSystem;
+
+            if (projectileParticleSystem.isPlaying)
+            {
+                projectileParticleSystem.Stop();
+            }
+            
+
+            // Create tasks that wait for each particle system to finish playing
+            var projectileParticlesTask = UniTask.WaitWhile(() => projectileParticleSystem.particleCount > 0);
+            var destroyedParticlesTask = UniTask.WaitWhile(() => destroyedParticleSystem.particleCount > 0);
+
+            // Wait for both tasks to complete
+            await UniTask.WhenAll(projectileParticlesTask, destroyedParticlesTask);
+
+            DestroyImmediate();
         }
 
         public EnemyInstance(GameObject gameObject, IEnemyController controller, IEnemyStateMachine stateMachine)

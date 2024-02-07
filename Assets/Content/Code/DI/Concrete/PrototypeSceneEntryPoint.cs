@@ -34,7 +34,9 @@ namespace Content.Code.DI.Concrete
         [SerializeField] private EnemyDeathFXController enemyDeathFXController;
         [SerializeField] private HealthIndicatorController healthIndicatorController;
         [SerializeField] private GameObject enemy1Prefab;
-        
+        [SerializeField] private GameObject enemy2Prefab;
+        [SerializeField] private GameObject enemy3Prefab;
+
         #endregion
         
         protected override void Setup()
@@ -91,9 +93,14 @@ namespace Content.Code.DI.Concrete
         {
             ServiceCollection.AddSingleton<IEnemyFactory, EnemyFactory>();
             ServiceCollection.AddSingleton<IEnemySpawner, EnemySpawner>();
-            ServiceCollection.AddSingleton<IDictionary<Type, IEnemyRecipe>>(new Dictionary<Type, IEnemyRecipe>
+            ServiceCollection.AddSingleton<IDictionary<Type, List<IEnemyRecipe>>>(new Dictionary<Type, List<IEnemyRecipe>>
             {
-                {typeof(SimpleEnemyRecipe), new SimpleEnemyRecipe(enemy1Prefab)}
+                    {typeof(SimpleEnemyRecipe), new List<IEnemyRecipe>
+                    {
+                        new SimpleEnemyRecipe(enemy1Prefab, 30),
+                        new SimpleEnemyRecipe(enemy2Prefab, 10),
+                        new SimpleEnemyRecipe(enemy3Prefab, 40),
+                    }},
             });
             ServiceCollection.AddSingleton<IEnemyRepository, EnemyRepository>();
             ServiceCollection.AddSingleton<IEnemyDeathFXController>(enemyDeathFXController);
