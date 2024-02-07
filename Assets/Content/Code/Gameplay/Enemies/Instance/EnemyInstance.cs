@@ -30,7 +30,7 @@ namespace Content.Code.Gameplay.Enemies.Instance
             StateMachine.OnDestroy();
             
             // Wait one frame
-            await UniTask.Yield();
+            await UniTask.Yield(PlayerLoopTiming.LastUpdate);
 
             var meshRenderer = EnemyDefinition.MeshRenderer;
             meshRenderer.enabled = false;
@@ -43,10 +43,9 @@ namespace Content.Code.Gameplay.Enemies.Instance
                 projectileParticleSystem.Stop();
             }
             
-
             // Create tasks that wait for each particle system to finish playing
-            var projectileParticlesTask = UniTask.WaitWhile(() => projectileParticleSystem.particleCount > 0);
             var destroyedParticlesTask = UniTask.WaitWhile(() => destroyedParticleSystem.particleCount > 0);
+            var projectileParticlesTask = UniTask.WaitWhile(() => projectileParticleSystem.particleCount > 0);
 
             // Wait for both tasks to complete
             await UniTask.WhenAll(projectileParticlesTask, destroyedParticlesTask);
